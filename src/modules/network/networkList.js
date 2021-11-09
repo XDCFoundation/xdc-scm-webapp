@@ -13,7 +13,7 @@ height: 700px;
 
 const HeaderContainer = styled.div`
 margin: 40px;
-width: 100%;
+// width: 100%;
 `
 
 const Heading = styled.span`
