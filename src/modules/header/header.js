@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import "../../assets/styles/custom.css";
+import Sidebar from "../sidebar/sidebar";
 
 const UserLogo = styled.img`
   width: 55px;
@@ -39,30 +40,31 @@ const SpaceBetween = styled.div`
   justify-content: space-between;
 `;
 
-function Header() {
-  const [openHumburger, setOpenHumburger] = useState(true);
+function Header(props) {
+  const [openHumburger, setOpenHumburger] = useState(false);
+  const handleToggle = () => setOpenHumburger(!openHumburger);
 
   return (
-    <HeaderContainer>
-      <SpaceBetween>
-        <div style={{ display: "flex", marginLeft: "12px" }}>
-          <XmartlyLogo
-            src="/images/Grid.svg"
-            onClick={() => setOpenHumburger(openHumburger)}
-          />
-          <XmartlyLogo src="/images/Logo.svg" />
-        </div>
-        <UserContainer>
-          <Row>
-            <UserLogo src="/images/kakashi.png" />
-            <Column>
-              <UserName>John Appleased</UserName>
-              <UserId>it@supportteam.com</UserId>
-            </Column>
-          </Row>
-        </UserContainer>
-      </SpaceBetween>
-    </HeaderContainer>
+    <>
+      <HeaderContainer>
+        <SpaceBetween>
+          <div style={{ display: "flex", marginLeft: "12px" }}>
+            <XmartlyLogo src="/images/Grid.svg" onClick={handleToggle} />
+            <XmartlyLogo src="/images/Logo.svg" />
+          </div>
+          <UserContainer>
+            <Row>
+              <UserLogo src="/images/kakashi.png" />
+              <Column>
+                <UserName>John Appleased</UserName>
+                <UserId>it@supportteam.com</UserId>
+              </Column>
+            </Row>
+          </UserContainer>
+        </SpaceBetween>
+      </HeaderContainer>
+      <Sidebar openHumburger={openHumburger} />
+    </>
   );
 }
 
