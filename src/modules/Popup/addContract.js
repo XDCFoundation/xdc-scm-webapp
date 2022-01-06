@@ -16,8 +16,20 @@ export default function AddContract(props) {
   const [hideStep, setHideStep] = useState(true);
   const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
+  const [verifyAddress, setVerifyAddress] = React.useState("");
   console.log("address", checkBox);
   console.log(props);
+
+  const checkAddress = async () => {
+    try {
+      const response = await ContractsService.checkAddress(address);
+      if (response) setVerifyAddress(address);
+    } catch (e) {
+      if (e === "Address already Exists") utility.apiFailureToast(e);
+      console.log(e);
+      utility.apiFailureToast(e);
+    }
+  };
 
   const addContract = async () => {
     try {
@@ -25,11 +37,6 @@ export default function AddContract(props) {
         contractAddress: address,
       };
       const response = await ContractsService.addContract(requestData);
-      console.log(response);
-      // if(error){
-      //   utility.apiFailureToast(error)
-      //   return
-      // }
       if (response.address && response.address === address) {
         utility.apiSuccessToast("Contract added");
         props.click();
@@ -40,13 +47,13 @@ export default function AddContract(props) {
     } catch (e) {
       if (e === "Address already Exists") utility.apiFailureToast(e);
       console.log(e);
-      // utility.apiFailureToast(e)
+      utility.apiFailureToast(e);
     }
   };
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
-      addContract();
+      checkAddress();
     }
   };
   return (
@@ -58,7 +65,6 @@ export default function AddContract(props) {
               <Add>Add Contract</Add>
               <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
-            {/* <ImportFile>Import Public Contracts</ImportFile> */}
             <div
               style={{
                 display: "flex",
@@ -92,12 +98,12 @@ export default function AddContract(props) {
                 address <br></br>4. Paste it on the given field below
               </Text>
             )}
-            {address === "" ? (
+            {verifyAddress === "" ? (
               ""
             ) : (
               <ImportBox>
                 <IconImport>
-                  <XDCLogo src="/images/network.svg"></XDCLogo>
+                  <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
                   <BlueLine></BlueLine>
                 </IconImport>
                 <SelectImport>
@@ -135,7 +141,6 @@ const BlueLine = styled.div`
 `;
 const AddressImport = styled.div`
   color: #436ce0;
-
   margin-left: 5px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -169,12 +174,10 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-
   padding: 20px;
 `;
 const SubContainer = styled.div`
@@ -186,10 +189,6 @@ const Add = styled.div`
   font-size: 1rem;
   font-weight: 600;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
-
 const Content = styled.div`
   color: #303134;
   margin-top: 15px;

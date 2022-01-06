@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../../Popup/contractAbi";
 import RenameContract from "../../Popup/renameContract";
 import Remove from "../../Popup/remove";
-
-import { history } from "../../../managers/history";
+import ShowLoader from "../../../common/components/showLoader";
 import HideContract from "../../Popup/hideContract";
+import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
+import utility from "../../../utility";
+import { history } from "../../../managers/history";
 
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -19,19 +20,20 @@ export default function ContractDetails() {
     setActiveButton(e.target.id);
   };
 
+  const [contractAddress, setContractAddress] = React.useState({});
   const getContractById = async () => {
-    // console.log(window.location.pathname);
     let url = window.location.pathname;
     let addressURL = url.split("/");
-    // console.log(addressURL);
     addressURL = addressURL[3];
-    // console.log(addressURL);
+    setContractAddress(addressURL);
     try {
+      setLoader(true);
       const response = await ContractsService.getContractsById(addressURL);
+      setLoader(false);
       console.log("response", response);
       setAddress(response);
     } catch (err) {
-      console.log(err);
+      setLoader(false);
     }
   };
   React.useEffect(() => {
@@ -39,8 +41,9 @@ export default function ContractDetails() {
   }, []);
 
   const [address, setAddress] = React.useState({});
-  const [value, setValues] = useState("");
+  const [value] = useState("");
   const [open, setOpen] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -50,14 +53,33 @@ export default function ContractDetails() {
   };
   const hideContract = async () => {
     let requestData = {
-      id: "61b6ddbcbf43f62ed425c60c",
+      id: contractAddress,
     };
     try {
+      setLoader(true);
       const response = await ContractsService.hideContract(requestData);
       console.log(response);
+      setHide(false);
+      window.location.reload();
     } catch (e) {
-      console.log(e);
+      console.log("Error", e);
     }
+    setLoader(false);
+  };
+  const showContract = async () => {
+    let requestData = {
+      id: contractAddress,
+    };
+    try {
+      setLoader(true);
+      const response = await ContractsService.showContract(requestData);
+      console.log(response);
+      setShowBox(false);
+      window.location.reload();
+    } catch (e) {
+      console.log("Error", e);
+    }
+    setLoader(false);
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -67,6 +89,9 @@ export default function ContractDetails() {
   const renameHandleClose = () => {
     setRenameState(false);
   };
+
+  // hide popup box handlers
+
   const [hide, setHide] = useState(false);
   const hideHandleOpen = () => {
     setHide(true);
@@ -74,6 +99,14 @@ export default function ContractDetails() {
   const hideHandleClose = () => {
     setHide(false);
   };
+
+  // show popup box handlers
+
+  const [show, setShowBox] = useState(false);
+  const hideShowOpen = () => {
+    setShowBox(true);
+  };
+
   const [remove, setRemoveState] = useState(false);
   const removeHandleOpen = () => {
     setRemoveState(true);
@@ -84,17 +117,26 @@ export default function ContractDetails() {
   const backButton = () => {
     history.push("/dashboard/contract");
   };
+
   return (
     <>
-      {/* <Row> */}
+      <ShowLoader state={loader} />
+
       <MainContainer>
         <SubContainer>
           <MainHeading>
-            <Heading>Contract Details</Heading>
+            <Heading>
+              <img
+                alt=""
+                src="/images/back.svg"
+                style={{ marginRight: "5px" }}
+                onClick={() => backButton()}
+              />
+              Contract Details
+            </Heading>
             <Button>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
-
         <Container>
           <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
             App_Transactions_Validator
@@ -106,12 +148,11 @@ export default function ContractDetails() {
               alignItems: "center",
             }}
           >
-            <Hash
-              type="text"
-              value={value}
-              onChange={(e) => setValues(e.target.value)}
-            />
-            {/* {address.address} */}
+            <Hash>
+              {utility.truncateTxnAddress(
+                "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+              )}
+            </Hash>
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
@@ -172,11 +213,9 @@ export default function ContractDetails() {
           {activeButton === "General" && (
             <DetailsSection>
               <div>
-                {/* {address.map((data) => { */}
-
                 <Div>
                   <TableHeading>Network</TableHeading>
-                  <TableData>{address.address}</TableData>
+                  <TableData>XDC Mainnet</TableData>
                 </Div>
                 <Div>
                   <TableHeading>Solidity version</TableHeading>
@@ -202,8 +241,6 @@ export default function ContractDetails() {
                   <TableHeading>Optimizations</TableHeading>
                   <Enabled>{address.status}</Enabled>
                 </Div>
-
-                {/* })} */}
               </div>
               <PopUp>
                 <PopUpBlock>
@@ -232,7 +269,12 @@ export default function ContractDetails() {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {renameState && <RenameContract click={renameHandleClose} />}
+                  {renameState && (
+                    <RenameContract
+                      address={address}
+                      click={renameHandleClose}
+                    />
+                  )}
                   <RowProperty onClick={() => renameHandleOpen()}>
                     <img alt="" src="/images/edit.svg" />
                   </RowProperty>
@@ -247,13 +289,19 @@ export default function ContractDetails() {
                       click={hideHandleClose}
                     />
                   )}
+                  {show && (
+                    <ShowContract
+                      showContract={showContract}
+                      click={() => setShowBox(false)}
+                    />
+                  )}
                   {address.isHidden ? (
                     <>
-                      <RowProperty onClick={() => hideHandleOpen()}>
+                      <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideHandleOpen()}>
-                        Hide Contract
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        Show Contract
                       </RowProperty>
                     </>
                   ) : (
@@ -268,7 +316,7 @@ export default function ContractDetails() {
                   )}
                 </PopUpBlock>
                 <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} />}
+                  {remove && <Remove click={removeHandleClose} contract={address}/>}
                   <RowProperty onClick={() => removeHandleOpen()}>
                     <img alt="" src="/images/delete.svg" />
                   </RowProperty>
@@ -282,7 +330,6 @@ export default function ContractDetails() {
           {activeButton === "Source Code" && <SourceCode />}
         </Container>
       </MainContainer>
-      {/* </Row> */}
     </>
   );
 }
@@ -299,11 +346,9 @@ const MainHeading = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  // max-width: 1100px;
   @media (min-width: 340px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-
     padding-bottom: 58px;
   }
 `;
@@ -343,6 +388,7 @@ const FinanceTag = styled.div`
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
+  padding-right: 8px;
   background-size: 0.875rem;
   position: relative;
   background-color: #eaefff;
@@ -353,26 +399,27 @@ const FinanceTag = styled.div`
   white-space: nowrap;
   height: 2.125rem;
   align-items: center;
+  color: #436ce0;
   text-align: center;
   display: flex;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-weight: 400;
 `;
 const AddTag = styled.button`
   color: #416be0;
   background: #ffffff 0% 0% no-repeat padding-box;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   outline: none;
   white-space: nowrap;
-  background-image: url("/images/globe.svg");
+  background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
   background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
-
   border: none;
   border-radius: 0.25rem;
   width: 100%;
@@ -388,47 +435,43 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 
+const Hash = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  width: 100%;
+  max-width: 24.063rem;
+`;
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 9.25rem;
+  height: 159px;
 `;
-const TitleDiv = styled.div``;
-const Title = styled.div`
-  @media (min-width: 340px) and (max-width: 768px) {
-    font-size: 1rem;
-  }
-`;
+
 const SubHeading = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
   color: #102c78;
+  margin-bottom: 10px;
 `;
 
-const Hash = styled.input`
-  display: flex;
-  flex-flow: row nowrap;
-  margin-top: 0.625rem;
-  font-weight: 600;
-  border: none;
-  width: 100%;
-  max-width: 24.063rem;
-`;
 const DetailsSection = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 35.313rem;
-  padding: 0.625rem;
+  padding: 0.625rem 0.625rem 1.5rem 0.625rem;
   margin-top: 1.25rem;
+  overflow-x: scroll;
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
-  padding: 1.25rem;
+  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
 `;
 const TableData = styled.div`
   font-size: 0.875rem;
@@ -458,6 +501,7 @@ const PopUp = styled.div`
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;
+  min-width: 900px;
 `;
 
 const PopUpBlock = styled.div`
@@ -474,8 +518,9 @@ const PopUpBlock = styled.div`
 `;
 const RowProperty = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: center;
+  text-align: center;
 `;
 const TabLister = styled.div`
   display: flex;
@@ -489,9 +534,7 @@ const TabLister = styled.div`
     max-width: 15.125rem;
   }
 `;
-const TabView = styled.div`
-  //
-`;
+const TabView = styled.div``;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
@@ -503,8 +546,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  // width: 100%;
-  max-width: 17.75rem;
+  max-width: 9.75rem;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;

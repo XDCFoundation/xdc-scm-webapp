@@ -2,86 +2,91 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
-
+import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 
-export default function About() {
+export default function About(props) {
   const [state, setState] = useState(true);
   return (
     <>
-    
-        <MainContainer>
-          <MainBoxContainer>
-            <Container>
-              <LeftContainer>
-                <Row>
-                  <DetailBox>
-                    Manage your <Span>Smart Contracts</Span> on XDC Network
-                  </DetailBox>
-                </Row>
-                <DataBox>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in
-                </DataBox>
-                <Button>
-                  Add Your Smart Contract
-                  <img
-                    style={{ marginLeft: "0.375rem" }}
-                    alt=""
-                    src="/images/questionmark.svg"
-                  />
-                </Button>
-              </LeftContainer>
-              <RightContainer>
-                <VideoBox>
-                  <img
-                    style={{ width: "3.75rem", height: "3.75rem" }}
-                    alt=""
-                    src="/images/play.svg"
-                  />
-                </VideoBox>
-              </RightContainer>
-            </Container>
+      <MainContainer>
+        <MainBoxContainer>
+          <Container>
+            <LeftContainer>
+              <Row>
+                <DetailBox>
+                  Manage your <Span>Smart Contracts</Span> on XDC Network
+                </DetailBox>
+              </Row>
+              <DataBox>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in
+              </DataBox>
+              <Button>
+                Add Your Smart Contract
+                <img
+                  style={{ marginLeft: "0.375rem" }}
+                  alt=""
+                  src="/images/question-mark.svg"
+                />
+              </Button>
+            </LeftContainer>
+            <RightContainer>
+              <VideoBox>
+                <img
+                  style={{ width: "3.75rem", height: "3.75rem" }}
+                  alt=""
+                  src="/images/play.svg"
+                />
+              </VideoBox>
+            </RightContainer>
+          </Container>
 
-            <GreyContainer>
-              <HeadingContainer>
-                Introducing the Smart Contracts -by XDC
-                <SubHead>Add smart contract and managing them</SubHead>
-              </HeadingContainer>
-              <IconRow>
-                <IconContainer>
-                  <img alt="" src="/images/manage contracts.svg" />
-                  <Title>Manage Contracts</Title>
-                  <SubTitle>
-                    You can add and manage any contract deployed on XDC Network.
-                  </SubTitle>
-                </IconContainer>
-                <IconContainer>
-                  <img alt="" src="/images/analyticsicon.svg" />
-                  <Title>Analytics</Title>
-                  <SubTitle>
-                    View analytics like number of transactions, gas fee etc for
-                    the added contract.
-                  </SubTitle>
-                </IconContainer>
-                <IconContainer>
-                  <img alt="" src="/images/set alerts.svg" />
-                  <Title>Set Alerts</Title>
-                  <SubTitle>
-                    You can set different types of alert for you contracts,
-                    without missing any information
-                  </SubTitle>
-                </IconContainer>
-              </IconRow>
-            </GreyContainer>
-          </MainBoxContainer>
-        </MainContainer>
-     
+          <GreyContainer>
+            <HeadingContainer>
+              Introducing the Smart Contracts -by XDC
+              <SubHead>Add smart contract and managing them</SubHead>
+            </HeadingContainer>
+            <IconRow>
+              <IconContainer>
+                <img alt="" src="/images/manage contracts.svg" />
+                <Title>Manage Contracts</Title>
+                <SubTitle>
+                  You can add and manage any contract deployed on XDC Network.
+                </SubTitle>
+              </IconContainer>
+              <IconContainer>
+                <img alt="" src="/images/analyticsicon.svg" />
+                <Title>Analytics</Title>
+                <SubTitle>
+                  View analytics like number of transactions, gas fee etc for
+                  the added contract.
+                </SubTitle>
+              </IconContainer>
+              <IconContainer>
+                <img alt="" src="/images/set alerts.svg" />
+                <Title>Set Alerts</Title>
+                <SubTitle>
+                  You can set different types of alert for you contracts,
+                  without missing any information
+                </SubTitle>
+              </IconContainer>
+            </IconRow>
+          </GreyContainer>
+        </MainBoxContainer>
+      </MainContainer>
+
       <div>
-        {true && <WalletPopUp click={() => setState(false)} state={state} />}
+        {!sessionManager.getDataFromCookies("isLoggedIn") && (
+          <WalletPopUp
+            getCurrentUserDetails={props.getCurrentUserDetails}
+            click={() => setState(false)}
+            state={state}
+          />
+        )}
       </div>
     </>
   );
@@ -97,7 +102,6 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 3.125rem;
-   @media (min-width: 340px) and (max-width: 768px) {
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -106,31 +110,28 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-self: center;
-   height: 500px;
+  height: 500px;
   max-width: 1306px;
-  @media  (min-width: 340px) and (max-width: 768px) {
-    flex-direction:column;
-    
-    padding-right:30px;
+  @media (min-width: 340px) and (max-width: 768px) {
+    flex-direction: column;
+    padding-right: 30px;
     padding-top: 30px;
-   
     padding-left: 46px;
     height: 778px;
-}
-
-`; 
+  }
+`;
 const RightContainer = styled.div`
   width: 100%;
   padding: 4.375rem;
-   @media (min-width: 340px) and (max-width: 768px) {
-     padding: 4.375rem;
-         height: 100%;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 4.375rem;
+    height: 100%;
+  }
 `;
 const LeftContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
 `;
-
 const Span = styled.span`
   color: #0089ff;
   white-space: nowrap;
@@ -165,11 +166,13 @@ const Button = styled.button`
   border: none;
   border-radius: 0.25rem;
   margin-top: 1.875rem;
-  height: 3.125rem;
   display: flex;
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
+  @media (min-width: 340px) and (max-width: 790px) {
+    margin-left: 112px;
+  }
 `;
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -181,10 +184,6 @@ const VideoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- @media (min-width: 340px) and (max-width: 768px) {
-
-
-
 `;
 
 const HeadingContainer = styled.div`
@@ -192,7 +191,6 @@ const HeadingContainer = styled.div`
   font-weight: 600;
   color: #1f1f1f;
   padding: 3.75rem;
-
 `;
 const GreyContainer = styled.div`
   background-color: none;
@@ -214,13 +212,11 @@ const SubTitle = styled.div`
   font-size: 1rem;
   color: #4b4b4b;
   margin-top: 0.438rem;
-  // width: 15rem;
 `;
 
 const IconContainer = styled.div`
   padding: 0.625rem;
-  // width: 28.125rem;
-  width:100%;
+  width: 100%;
   height: 150px;
   margin: 0px 10px 20px 10px;
   max-width: 18.75rem;
@@ -231,7 +227,6 @@ const IconContainer = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
-
 `;
 const SubHead = styled.div`
   font-size: 1rem;
