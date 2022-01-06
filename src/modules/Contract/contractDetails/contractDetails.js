@@ -313,21 +313,20 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-   @media (min-width: 300px) and (max-width: 767px) {
-     padding-top: 47px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-top: 47px;
     padding-bottom: 33px;
-   
-
-  
+  }
 `;
 const Heading = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-     font-size: 1rem;
-     padding-bottom:10px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
 `;
 const Verified = styled.div`
   font-size: 1rem;
