@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
-import Header from "../header/header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
 import { history } from "../../managers/history";
@@ -18,7 +17,6 @@ export default function TransactionDetails() {
     <>
       <Header />
       <Row>
-        {/* <Sidebar /> */}
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <TitleDiv>
@@ -151,7 +149,6 @@ export default function TransactionDetails() {
                 <SubHead>App_Transactions_Validator</SubHead>
               </Row>
             </DetailContainer>
-
             <CommonDiv>
               <Row>
                 <Heads>
@@ -255,7 +252,6 @@ export default function TransactionDetails() {
   );
 }
 const SubHead = styled.div`
-  // font: normal normal medium 14px/17px Inter;
   font-size: 20px;
   font-weight: 600px;
   letter-spacing: 0px;

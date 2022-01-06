@@ -11,7 +11,9 @@ const useStyles = makeStyles(() => ({
 
 export default function WalletPopUp(props) {
   const classes = useStyles();
-
+  const connectWallet = () => {
+    if (props.getCurrentUserDetails()) props.click();
+  };
   return (
     <div>
       {props.state ? (
@@ -32,7 +34,7 @@ export default function WalletPopUp(props) {
                 <IconContainer>
                   <StepsTitle>Step 1</StepsTitle>
                   <img
-                    style={{ width: "50px" }}
+                    style={{ width: "40px" }}
                     alt=""
                     src="/images/XDCinstall.svg"
                   />
@@ -42,7 +44,7 @@ export default function WalletPopUp(props) {
                   </SubTitle>
                 </IconContainer>
                 <IconContainer>
-                  <StepsTitle>Step 1</StepsTitle>
+                  <StepsTitle>Step 2</StepsTitle>
                   <img alt="" src="/images/XDClogin.svg" />
                   <Title>Login to XDCPay</Title>
                   <SubTitle>
@@ -50,13 +52,13 @@ export default function WalletPopUp(props) {
                   </SubTitle>
                 </IconContainer>
                 <IconContainer>
-                  <StepsTitle>Step 1</StepsTitle>
+                  <StepsTitle>Step 3</StepsTitle>
                   <img alt="" src="/images/XDCwallet.svg" />
                   <Title>Connect Wallet</Title>
                   <SubTitle>Connect your XDCPay wallet with SmartHub.</SubTitle>
                 </IconContainer>
               </DetailBox>
-              <Button>
+              <Button onClick={() => connectWallet()}>
                 <img
                   style={{ paddingLeft: "30px", marginRight: "15px" }}
                   alt=""
@@ -108,7 +110,6 @@ const StepsTitle = styled.div`
 `;
 const SubTitle = styled.div`
   text-align: center;
-
   letter-spacing: 0px;
   opacity: 1;
   padding-top: 10px;
@@ -119,7 +120,6 @@ const SubTitle = styled.div`
 const IconContainer = styled.div`
   padding: 20px;
 `;
-
 const CrossIcon = styled.img`
   cursor: pointer;
   width: 16px;
@@ -140,11 +140,9 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  // padding-left: 30px;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  // padding-bottom: 20px;
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
@@ -165,7 +163,6 @@ const Add = styled.div`
   color: #303134;
   padding-top: 15px;
   padding-bottom: 5px;
-  // margin-left: -12px;
   border-bottom: 1px solid #d8d8d8;
   display: flex;
   justify-content: space-between;
@@ -173,7 +170,6 @@ const Add = styled.div`
 `;
 
 const RowContainer = styled.div`
-  // padding: 18px 14px 12px 12px;
   display: flex;
   justify-content: space-between;
   width: 100%;

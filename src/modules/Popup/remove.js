@@ -2,23 +2,46 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import ButtonConfirm from "../../common/components/buttonConfirm";
+import ContractService from '../../services/contractsService'
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
-    width: "100% !important",
+    width: "50% !important",
   },
 }));
 
 export default function Remove(props) {
   const classes = useStyles();
+  console.log(props.contract)
+  const executeRemoveContract = async () => {
+    console.log("HERE")
+    const request = {
+      id : props.contract._id
+    }
+    const response = await ContractService.removeContract(request);
+    console.log(response)
+
+  }
+
   return (
     <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+      <Dialog
+        classes={{ paper: classes.dialogBox }}
+        open={true}
+        fullWidth
+        maxWidth="xm"
+      >
         <MainContainer>
           <Container>
-            <SubContainer>
+            <SubContainer style={{ justifyContent: "space-between" }}>
               <Add>Remove Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img
+                alt=""
+                src="/images/XDC-Cross.svg"
+                onClick={props.click}
+                style={{ cursor: "pointer" }}
+              />
             </SubContainer>
             <Content>
               Are you sure you wish to remove the contract? This will remove the
@@ -26,10 +49,10 @@ export default function Remove(props) {
               that use this contract.
             </Content>
             <SubContainer
-              style={{ width: "100%", maxWidth: "220px", marginTop: "30px" }}
+              style={{ width: "100%",  marginTop: "30px" }}
             >
-              <RemoveButton>Remove Contract</RemoveButton>
-              <CancelButton>Cancel</CancelButton>
+              <ButtonConfirm text={"Remove Contract"} click={ executeRemoveContract }/>
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -46,35 +69,18 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-  max-width: 700px;
-  height: 200px;
   padding: 20px;
 `;
 const SubContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
-`;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
-
-const RemoveButton = styled.button`
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #ffffff;
-  background: #3163f0 0% 0% no-repeat padding-box;
-  border: 0px;
-  border-radius: 4px;
-  text-align: center;
-  white-space: nowrap;
 `;
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
@@ -83,6 +89,7 @@ const CancelButton = styled.button`
   background-color: #ffffff;
   border: 1px solid #3163f0;
   text-align: center;
+  padding: 10px 12px;
 `;
 const Content = styled.div`
   font: normal normal medium 16px/20px Inter;

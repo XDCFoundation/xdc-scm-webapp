@@ -8,6 +8,8 @@ import StateChange from "./StateChange";
 import SubContracts from "./SubContracts";
 import { history } from "../../managers/history";
 
+import utility from "../../utility";
+
 export default function TransactionDetails() {
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
@@ -18,33 +20,34 @@ export default function TransactionDetails() {
   };
   return (
     <MainContainer>
-      <Row style={{ display: "flex", justifyContent: "space-between" }}>
+      <SubContainer>
         <TitleDiv>
-          <img
-            alt=""
-            style={{ marginRight: "0.425rem", cursor: "pointer" }}
-            src="/images/back.svg"
-            onClick={backButton}
-          />
-          <Title>Transactions Details</Title>
+          <Title>
+            {" "}
+            <img
+              alt=""
+              src="/images/back.svg"
+              style={{ marginRight: "2px" }}
+              onClick={() => backButton()}
+            />{" "}
+            Transactions Details
+          </Title>
         </TitleDiv>
         <Button>View in Explorer</Button>
-      </Row>
+      </SubContainer>
 
       <Container>
         <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
           Txn hash
         </SubHeading>
-        <div
-          style={{
-            paddingLeft: "1.25rem",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
+        <TopContainer>
+          <Hash>
+            {utility.truncateTxnAddress(
+              "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+            )}
+          </Hash>
           <CopyToClipboard>
-            <CopyImg src="/images/copy.svg" />
+            <img alt="" src="/images/copy.svg" />
           </CopyToClipboard>
           <RedButton>Fail</RedButton>
           <AlertButton>
@@ -54,9 +57,9 @@ export default function TransactionDetails() {
               style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
               src="/images/addalert.svg"
             />
-            Add Alert
+            Add alert
           </AlertButton>
-        </div>
+        </TopContainer>
 
         <TabLister>
           <TabView
@@ -66,13 +69,14 @@ export default function TransactionDetails() {
               color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
               display: "flex",
               paddingBottom: "0.875rem",
+              paddingLeft: "10px",
               borderBottom:
                 activeButton === "Overview"
                   ? "0.225rem solid #3163F0"
                   : "#AEB7D0",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
@@ -89,12 +93,12 @@ export default function TransactionDetails() {
             style={{
               color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
               display: "flex",
-              paddingBottom: "0.875rem",
+              paddingBottom: "1rem",
               borderBottom:
                 activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
@@ -111,12 +115,12 @@ export default function TransactionDetails() {
             style={{
               color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
               display: "flex",
-              paddingBottom: "0.875rem",
+              paddingBottom: "1rem",
               borderBottom:
                 activeButton === "Events" ? "0.225rem solid #3163F0" : "",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
@@ -136,7 +140,7 @@ export default function TransactionDetails() {
                 activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem", marginBottom: "4px" }}
               src={
@@ -180,25 +184,27 @@ export default function TransactionDetails() {
                 <Row>
                   <Heading>From</Heading>
                   <SubHead style={{ display: "flex", alignItems: "center" }}>
-                    <Hash>
-                      <TransactionNumber>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                      </TransactionNumber>
-                    </Hash>
-                    <CopyImg src="/images/copy.svg" />
+                    <TransactionNumber>
+                      {utility.truncateTxnAddress(
+                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+                      )}
+                    </TransactionNumber>
+
+                    <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
               </CommonDiv>
               <CommonDiv>
                 <Row>
                   <Heading>To</Heading>
-                  <SubHead style={{ display: "flex", alignItems: "center" }}>
-                    <Hash>
-                      <TransactionNumber>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                      </TransactionNumber>
-                    </Hash>
-                    <CopyImg src="/images/copy.svg" />
+                  <SubHead>
+                    <TransactionNumber>
+                      {utility.truncateTxnAddress(
+                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+                      )}
+                    </TransactionNumber>
+
+                    <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
               </CommonDiv>
@@ -241,58 +247,95 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>Raw input</Heading>
-                  <SubHead style={{ display: "flex", alignItems: "center" }}>
+                  <SubHead>
                     <Hash>
                       <TransactionNumber>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                        {utility.truncateTxnAddress(
+                          "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+                        )}
                       </TransactionNumber>
                     </Hash>
-                    <CopyImg src="/images/copy.svg" />
+                    <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
               </CommonDiv>
             </MidContainer>
-            <NewContainer>
+            <FunctionContainer>
               <CommonDiv>
                 <Row>
-                  <Heading>Function:</Heading>
-                  <SHead>transfer()</SHead>
+                  <Heading>Function: </Heading>
+                  <SubHeadBlue>transfer()</SubHeadBlue>
                 </Row>
               </CommonDiv>
               <CommonDiv>
                 <Row>
-                  <Heading>Input</Heading>
-                  <SHead>view data </SHead>
+                  <Heading>Input:</Heading>
+                  <SubHeadBlue>
+                    view data
+                    <img
+                      style={{ marginLeft: "2px" }}
+                      alt=""
+                      src="/images/Arrrow.svg"
+                    />
+                  </SubHeadBlue>
                 </Row>
               </CommonDiv>
-
-              <ThirdBox>
-                <Row
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <CAllADDs>
-                    Caller Address:
-                    <br />
-                    462482482765
-                  </CAllADDs>
-
-                  <CAllADDs>
-                    Contract Address:
-                    <br />
-                    4752589752
-                  </CAllADDs>
+              <CommonDiv>
+                <Row>
+                  <Heading>Output </Heading>
+                  <SubHeadBlue>
+                    veiw data
+                    <img
+                      style={{ marginLeft: "2px" }}
+                      alt=""
+                      src="/images/Arrrow.svg"
+                    />
+                  </SubHeadBlue>
                 </Row>
-              </ThirdBox>
-            </NewContainer>
-            <b>Stack Trace</b>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Heading>Caller Address </Heading>
+                  <Heading>Contact Address </Heading>
+                </Row>
+                <Row>
+                  <SubHeading
+                    style={{ fontWeight: "400", marginRight: "40px" }}
+                  >
+                    xdcabf...a32c99be1768b3c
+                  </SubHeading>
+                  <SubHeading style={{ fontWeight: "400", marginLeft: "38px" }}>
+                    xdcabf...a32c99be1768b3c
+                  </SubHeading>
+                </Row>
+              </CommonDiv>
+            </FunctionContainer>
+            <b>Token Transfer</b>
+            <TokenTransferDiv>
+              <CommonDiv>
+                <Row>
+                  <Heading>From:</Heading>
+                  <SubHeadBlue>xdcabfe4184e5f9.....fsfbsgsgsa768b3</SubHeadBlue>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Heading>To:</Heading>
+                  <SubHeadBlue>
+                    xdcabfe4184e5f9......2fsfbsgsgsa768b3
+                  </SubHeadBlue>
+                </Row>
+              </CommonDiv>
+            </TokenTransferDiv>
+            <b>Stack Trace</b> <ToolTipIcon src="/images/tool tip.svg" />
             <StackContainer>
-              <TextLi>Error Messege:out of gas</TextLi>
-              balances[_to] = balances[_to].add(_value);
+              <TextLine>Error Messege:out of gas</TextLine>
+              <img alt="" src="/images/error.svg" /> balances[_to] =
+              balances[_to].add(_value);
               <br />
-              at App_Transactions_Validator.sol in App_Transactions_Validator
+              <div style={{ paddingLeft: "24px" }}>
+                At App_Transactions_Validator.sol in App_Transactions_Validator
+              </div>
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -300,7 +343,7 @@ export default function TransactionDetails() {
               <img
                 alt=""
                 src="/images/contracts.svg"
-                style={{ width: "1rem" }}
+                style={{ width: "1rem", marginRight: "3px" }}
               />
               transfer in App_Transactions_Validator
             </LastContainer>
@@ -313,6 +356,17 @@ export default function TransactionDetails() {
     </MainContainer>
   );
 }
+const TopContainer = styled.div`
+  padding-left: 1.25rem;
+  display: flex;
+  align-items: center;
+`;
+const TabImage = styled.img`
+  @media (min-width: 300px) and (max-width: 485px) {
+    width: 13px;
+  }
+`;
+
 const TitleDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -322,21 +376,43 @@ const TitleDiv = styled.div`
   font-size: 24px;
   font-weight: 600;
 `;
-const Title = styled.div``;
-const NewContainer = styled.div`
+const Title = styled.div`
+  white-space: nowrap;
+`;
+const FunctionContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  display: flex;
   border-radius: 0.375rem;
   opacity: 1;
   margin-top: 1.25rem;
   height: auto;
+  white-space: nowrap;
+  margin-bottom: 20px;
+  @media (min-width: 300px) and (max-width: 485px) {
+    flex-direction: column;
+    display: flex;
+  }
+`;
+const TokenTransferDiv = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 0.375rem;
+  opacity: 1;
+  margin-top: 1.25rem;
+  height: auto;
+  white-space: nowrap;
+  margin-bottom: 20px;
 `;
 
 const SubHead = styled.div`
   font-size: 0.75rem;
+  display: flex;
+`;
+const SubHeadBlue = styled.div`
+  font-size: 0.85rem;
+  display: flex;
+  color: #416be0;
 `;
 const CommonDiv = styled.div`
-  border-bottom: 0.031rem #c9d1cb solid;
+  border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
 `;
 const MidContainer = styled.div`
@@ -345,6 +421,7 @@ const MidContainer = styled.div`
   opacity: 1;
   margin-top: 1.25rem;
   height: auto;
+  white-space: nowrap;
 `;
 const StackContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -359,14 +436,14 @@ const LastContainer = styled.div`
   margin-top: 1.25rem;
   height: 18.75rem;
   padding: 2rem;
+  font-weight: 600;
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
-  padding: 3.125rem;
+  padding: 2.125rem;
   display: 100%;
-  overflow-x: scroll;
-  height: 100vh;
+  height: 200vh;
 `;
 
 const Heading = styled.div`
@@ -378,31 +455,11 @@ const Heading = styled.div`
   max-width: 16.25rem;
 `;
 
-const TransactionNumber = styled.b`
+const TransactionNumber = styled.div`
   color: #416be0;
-  display: flex;
-  width: 100%;
-`;
-const ThirdBox = styled.div`
-  text-align: left;
-  padding: 0.625rem;
-  font-size: 0.875rem;
   font-weight: 600;
-  color: #102c78;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 21rem;
 `;
 
-const CAllADDs = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 100%;
-  max-width: 21rem;
-`;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
@@ -414,28 +471,48 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  // width: 100%;
   max-width: 17.75rem;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
+  @media (min-width: 300px) and (max-width: 485px) {
+    display: none;
+  }
+`;
+const SubContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 3.125rem;
+  align-items: center;
+  @media (min-width: 300px) and (max-width: 485px) {
+    flex-direction: column;
+  }
 `;
 
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 8.75rem;
-  margin-top: 1.25rem;
+  height: 9.2rem;
+  margin-top: 0.5rem;
   width: 100%;
+  @media (min-width: 300px) and (max-width: 768px) {
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    width: 100%;
+    height: 8rem;
+    margin-top: 1.25rem;
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 const Hash = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
-  // font-weight: 600;
+  margin-bottom: 10px;
   border: none;
   width: 100%;
   max-width: 24.063rem;
@@ -444,31 +521,29 @@ const SubHeading = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
+  display: flex;
 `;
 
-const CopyImg = styled.img`
-  margin-left: 4%;
+const CopyToClipboardImg = styled.img`
+  margin-left: 35px;
   cursor: pointer;
 `;
 
-const SHead = styled.div`
-  color: #416be0;
-`;
-
-const TextLi = styled.div`
+const TextLine = styled.div`
   text-align: left;
-  letter-spacing: 0rem;
   color: #ce1a1a;
-  opacity: 1;
+  font-weight: 600;
+  padding-left: 24px;
 `;
 const SearchBar = styled.input`
   height: 2.188rem;
   width: 12.5rem;
   border: none;
-  margin-left: 0.938rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   background-image: url("/images/search-icon.svg");
   background-repeat: no-repeat;
+  background-color: #f5f6fd;
   background-position: 0.5rem;
   padding-left: 1.875rem;
   background-size: 0.75rem;
@@ -485,10 +560,21 @@ const TabLister = styled.div`
   max-width: 39.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
+  @media (min-width: 340px) and (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    min-height: 45px;
+    font-size: 13px;
+    overflow-y: hidden;
+    margin: 0rem 0rem 0rem 0rem;
+    white-space: nowrap;
+  }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   displat: flex;
+  @media (min-width: 340px) and (max-width: 768px) {
+  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
@@ -497,19 +583,18 @@ const ToolTipIcon = styled.img`
 `;
 const RedButton = styled.div`
   color: #ce1a1a;
-  padding: 14px;
+  padding: 0px 0px 0px 18px;
   width: 100%;
   margin-left: 1rem;
   display: flex;
   align-items: center;
-  top: 202px;
-  left: 939px;
   width: 69px;
   height: 25px;
   background: #fde7e7 0% 0% no-repeat padding-box;
   border: 1px solid #fda6a6;
   border-radius: 4px;
   opacity: 1;
+  margin-right: 12px;
 `;
 const AlertButton = styled.div`
   top: 202px;
@@ -522,7 +607,10 @@ const AlertButton = styled.div`
   border-radius: 4px;
   opacity: 1;
   color: #3163f0;
-  margin-left: 20px;
+  margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: none;
+  }
 `;

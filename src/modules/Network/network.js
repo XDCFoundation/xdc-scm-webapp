@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { Row } from "simple-flexbox";
 import AddNetwork from "../Popup/addNetwork";
 
@@ -83,7 +82,6 @@ const SubContainer = styled.div`
   align-items: center;
 `;
 const Heading = styled.span`
-  // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
@@ -127,14 +125,12 @@ const Div = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   height: 25rem;
-  margin-top: 1.25rem;
+  margin-top: 0.6rem;
   padding: 0.625rem;
 
   @media (min-width: 300px) and (max-width: 768px) {
     height: 400px;
     overflow: scroll;
-    // width: 100%;
-    // max-width: 200px;
   }
 `;
 const Container = styled.div`
@@ -142,8 +138,6 @@ const Container = styled.div`
   border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  // display: flex;
-  // flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
@@ -160,6 +154,7 @@ const Url = styled.div`
   color: #416be0;
   width: 100%;
   max-width: 15.625rem;
+  margin-left: -5px;
   @media (min-width: 300px) and (max-width: 767px) {
     max-width: 7.625rem;
     width: 100%;

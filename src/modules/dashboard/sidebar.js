@@ -1,49 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
-
-const SidebarContainer = styled.div`
-  // width: 100%;
-  // max-width: 200px;
-
-  // @media (min-width: 300px) and (max-width: 1024px) {
-  //   // display: none;
-  //   position: absolute;
-  //   z-index: 1;
-  // }
-  background: #102c78 0% 0% no-repeat padding-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* min-height: 100vh; */
-  height: 100%;
-  width: 280px;
-  padding-top: 15px;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const Icon = styled.img`
-  cursor: pointer;
-  margin-right: 13px;
-`;
-
-const Wrapper = styled.div`
-  flex-wrap: wrap;
-  cursor: pointer;
-  width: 100%;
-  max-width: 240px;
-  white-space: nowrap;
-  padding: 23px;
-  &:hover {
-    background: #1d3c93;
-  }
-`;
-
-const Heading = styled.span`
-  color: #ffffff;
-`;
+import utility from "../../utility";
 
 export default function Sidebar(props) {
   const redirectToAbout = () => {
@@ -70,9 +28,7 @@ export default function Sidebar(props) {
   const redirectToLogout = () => {
     history.push("/");
   };
-  // const redirectToAbout = () => {
-  //   history.push("/");
-  // };
+
   const [aboutIcon, setAboutIcon] = React.useState(
     "/images/abouticon_blue.svg"
   );
@@ -80,7 +36,7 @@ export default function Sidebar(props) {
     "/images/Transactions.svg"
   );
   const [contractsIcon, setContractsIcon] = React.useState(
-    "/images/Transactions.svg"
+    "/images/contracts.svg"
   );
   const [networksIcon, setNetworksIcon] = React.useState(
     "/images/networks.svg"
@@ -114,7 +70,10 @@ export default function Sidebar(props) {
     <SidebarContainer>
       <Wrapper
         onClick={redirectToAbout}
-        style={{ marginTop: "4rem" }}
+        style={{
+          marginTop: "4rem",
+          backgroundColor: utility.isMenuActive("about") ? "#1d3c93" : "",
+        }}
         onMouseOver={() => changeSourceForIcons("about")}
         onMouseOut={() => changeOriginalSourceForIcons("about")}
       >
@@ -122,6 +81,9 @@ export default function Sidebar(props) {
         <Heading>About Xmartly</Heading>
       </Wrapper>
       <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("transaction") ? "#1d3c93" : "",
+        }}
         onClick={redirectToTransaction}
         onMouseOver={() => changeSourceForIcons("Transaction")}
         onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
@@ -130,6 +92,9 @@ export default function Sidebar(props) {
         <Heading>Transactions</Heading>
       </Wrapper>
       <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("contract") ? "#1d3c93" : "",
+        }}
         onClick={redirectToContract}
         onMouseOver={() => changeSourceForIcons("Contracts")}
         onMouseOut={() => changeOriginalSourceForIcons("Contracts")}
@@ -138,6 +103,9 @@ export default function Sidebar(props) {
         <Heading>Contracts</Heading>
       </Wrapper>
       <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("network") ? "#1d3c93" : "",
+        }}
         onClick={redirectToNetwork}
         onMouseOver={() => changeSourceForIcons("Networks")}
         onMouseOut={() => changeOriginalSourceForIcons("Networks")}
@@ -146,6 +114,9 @@ export default function Sidebar(props) {
         <Heading>Networks</Heading>
       </Wrapper>
       <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
+        }}
         onClick={redirectToAnalytics}
         onMouseOver={() => changeSourceForIcons("Analytics")}
         onMouseOut={() => changeOriginalSourceForIcons("Analytics")}
@@ -154,6 +125,9 @@ export default function Sidebar(props) {
         <Heading>Analytics</Heading>
       </Wrapper>
       <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("rules") ? "#1d3c93" : "",
+        }}
         onClick={redirectToAlerting}
         onMouseOver={() => changeSourceForIcons("Alerting")}
         onMouseOut={() => changeOriginalSourceForIcons("Alerting")}
@@ -183,4 +157,36 @@ const CenterDiv = styled.div`
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
+`;
+
+const SidebarContainer = styled.div`
+  background: #102c78 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 280px;
+  padding-top: 15px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const Icon = styled.img`
+  cursor: pointer;
+  margin-right: 13px;
+`;
+const Wrapper = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+
+const Heading = styled.span`
+  color: #ffffff;
 `;

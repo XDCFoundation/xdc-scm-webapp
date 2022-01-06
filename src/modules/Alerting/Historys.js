@@ -1,12 +1,10 @@
 import React from "react";
-import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
 export default function Historys() {
   return (
     <MainContainer>
-      {/* <TableContainer> */}
       <DetailBox>
         <NewDiv>
           <RowContainer>
@@ -36,7 +34,6 @@ export default function Historys() {
           </RowData>
         </Div>
       </DetailBox>
-      {/* </TableContainer> */}
     </MainContainer>
   );
 }
@@ -46,12 +43,11 @@ const MainContainer = styled.div`
   opacity: 1;
   margin-top: 1.25rem;
   height: 15.625rem;
-
   overflow-y: hidden;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {
-      width: 10px;
+      width: 500px;
       border: 0.5px solid rgb(204, 229, 243);
       outline: none;
     }
@@ -61,7 +57,9 @@ const MainContainer = styled.div`
     }
     ::-webkit-scrollbar-thumb {
       background: rgb(56, 56, 231);
+      width: 1px;
       border-radius: 15px;
+      background-clip: content-box;
     }
   }
 `;
@@ -118,7 +116,6 @@ const ColumnTwo = styled.div`
   font-size: 0.875rem;
   color: #191919;
   font-size: 0.875rem;
-  // font-weight: 600;
   width: 100%;
   max-width: 18.75rem;
 `;

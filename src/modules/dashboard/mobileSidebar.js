@@ -2,77 +2,26 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 
-const Hamburger = styled.img`
-  width: 25px;
-  height: 25px;
-  margin: 5px 12px 0px 9px;
-  position: absolute;
-  left: 123px;
-  top: 51px;
-  cursor: pointer;
-  @media (min-width: 769px) {
-    display: none;
-  }
-`;
-const SidebarContainer = styled.div`
-  position: absolute;
-  z-index: 1000;
-  background: #102c78 0% 0% no-repeat padding-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  height: 100%;
-  width: 280px;
-  padding-top: 15px;
-
-  @media (min-width: 769px) {
-    display: none;
-  }
-`;
-const Icon = styled.img`
-  cursor: pointer;
-  margin-right: 13px;
-`;
-
-const Wrapper = styled.div`
-  flex-wrap: wrap;
-  cursor: pointer;
-  width: 100%;
-  max-width: 240px;
-  white-space: nowrap;
-  padding: 23px;
-  &:hover {
-    background: #1d3c93;
-  }
-`;
-
-const Heading = styled.span`
-  color: #ffffff;
-`;
-// const Div = styled.div`
-//   background: #102c78 0% 0% no-repeat padding-box;
-// `;
-
 export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
   const redirectToTransaction = () => {
     history.push("/dashboard/transaction-list");
+    setOpen(false);
   };
   const redirectToContract = () => {
     history.push("/dashboard/contract");
+    setOpen(false);
   };
   const redirectToNetwork = () => {
     history.push("/dashboard/network");
+    setOpen(false);
   };
   const redirectToAnalytics = () => {
     history.push("/dashboard/analytics");
+    setOpen(false);
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/Alerting");
-  };
-  const redirectToFaqs = () => {
-    history.push("/");
+    history.push("/dashboard/rules");
   };
   const redirectToLogout = () => {
     history.push("/");
@@ -80,21 +29,13 @@ export default function Sidebar(props) {
   const redirectToAbout = () => {
     history.push("/");
   };
-  const [transactionIcon, setTransactionIcon] = React.useState(
+  const [transactionIcon, setTransactionIcon] = useState(
     "/images/Transactions.svg"
   );
-  const [contractsIcon, setContractsIcon] = React.useState(
-    "/images/Transactions.svg"
-  );
-  const [networksIcon, setNetworksIcon] = React.useState(
-    "/images/networks.svg"
-  );
-  const [analyticsIcon, setAnalyticsIcon] = React.useState(
-    "/images/Analytics.svg"
-  );
-  const [alertingIcon, setAlertingIcon] = React.useState(
-    "/images/Alerting.svg"
-  );
+  const [contractsIcon, setContractsIcon] = useState("/images/contracts.svg");
+  const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
+  const [analyticsIcon, setAnalyticsIcon] = useState("/images/Analytics.svg");
+  const [alertingIcon, setAlertingIcon] = useState("/images/Alerting.svg");
 
   const changeSourceForIcons = (value) => {
     if (value === "Transaction")
@@ -187,6 +128,50 @@ const CenterDiv = styled.div`
   margin-top: 2rem;
   margin-bottom: 3rem;
 `;
-const Spacing = styled.div`
-  margin-top: 8rem;
+
+const Hamburger = styled.img`
+  width: 25px;
+  height: 25px;
+  margin: 5px 12px 0px 9px;
+  position: absolute;
+  left: 123px;
+  top: 44px;
+  cursor: pointer;
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+const SidebarContainer = styled.div`
+  position: absolute;
+  z-index: 1000;
+  background: #102c78 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 280px;
+  padding-top: 15px;
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+const Icon = styled.img`
+  cursor: pointer;
+  margin-right: 13px;
+`;
+
+const Wrapper = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+
+const Heading = styled.span`
+  color: #ffffff;
 `;
