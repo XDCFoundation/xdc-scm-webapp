@@ -539,18 +539,7 @@ const SolidityData = styled.div`
     margin-left: -46px;
   }
 `;
-const TagData = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #191919;
-  width: 100%;
-  max-width: 9.375rem;
-  font-size: 1rem;
-  font-weight: 600;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: 14px;
-  }
-`;
+
 const EvmData = styled.div`
   font-size: 0.875rem;
   font-weight: 600;

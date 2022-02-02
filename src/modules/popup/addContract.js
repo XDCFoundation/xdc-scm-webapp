@@ -19,38 +19,41 @@ export default function AddContract(props) {
   const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
   const [verifyAddress, setVerifyAddress] = React.useState("");
-  const [loader ,setLoader] = React.useState(false)
+  const [loader, setLoader] = React.useState(false);
 
   const checkAddress = async () => {
-      setLoader(true)
-      const [error] = await utility.parseResponse(ContractsService.checkAddress(address));
-      setLoader(false)
-      if(error){
-        utility.apiFailureToast(error);
-        return;
-      }
-      setVerifyAddress(address);
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(ContractsService.checkAddress(address));
+
+    setLoader(false);
+    if (error) {
+      utility.apiFailureToast(error);
+      return;
+    }
+    setVerifyAddress(address);
+    props.setNetworkUrl(response.network);
+    console.log("props.networkUrl", props.networkUrl);
   };
 
   const addContract = async () => {
-      let userId = sessionManager.getDataFromCookies("userId")
-         let requestData = {
-        contractAddress: address,
-        userId:userId
-      };
-      setLoader(true)
-      const [error ,response] = await utility.parseResponse(ContractsService.addContract(requestData));
-      setLoader(false)
-      if(error){
-        utility.apiFailureToast(error);
-        return;
-      }
-      if (response) {
-        utility.apiSuccessToast("Contract added");
-        props.click();
-        props.getContractList();
-        // props.reloadData();
-      } 
+    let userId = sessionManager.getDataFromCookies("userId");
+    let requestData = {
+      contractAddress: address,
+      userId: userId,
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(ContractsService.addContract(requestData));
+    setLoader(false);
+    if (error) {
+      utility.apiFailureToast(error);
+      return;
+    }
+    if (response) {
+      utility.apiSuccessToast("Contract added");
+      props.click();
+      props.getContractList();
+      // props.reloadData();
+    }
   };
 
   const handleEnterKey = (e) => {
@@ -102,7 +105,7 @@ export default function AddContract(props) {
             ) : (
               <ImportBox>
                 <IconImport>
-                  <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
+                  <XDCLogo networkUrl={props.networkUrl}></XDCLogo>
                   <BlueLine></BlueLine>
                 </IconImport>
                 <SelectImport>
@@ -130,6 +133,7 @@ const CheckBox = styled.input`
 `;
 const XDCLogo = styled.img`
   margin-bottom: 5px;
+  src: ${(props) => (props.networkUrl === "wss://ws.xinfin.network" ? `url("/images/network_xdc.svg")` : `url("/images/Tag.svg")`)};
 `;
 const BlueLine = styled.div`
   width: 30px;
