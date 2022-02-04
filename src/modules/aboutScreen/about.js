@@ -122,17 +122,16 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 3.125rem;
-  @media (min-width: 300px) and (max-width: 700px) {
-    padding: 1.125rem;
-  }
-  @media (max-width: 375px) {
-    padding: 16px;
-  }
-  @media (max-width: 768px) {
-    padding: 30px;
+  @media (min-width: 1025px) and (max-width: 1400px) {
+    display: block;
   }
   @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 16px;
+    padding: 1.5rem;
+    height: 100%;
+  }
+  @media (min-width: 0px) and (max-width: 767px) {
+    padding: 4.5rem 1rem;
+    height: 100%;
   }
 `;
 const Container = styled.div`
@@ -172,13 +171,17 @@ const RightContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 30px;
   }
+  @media (min-width: 769px) and (max-width: 801px) {
+    padding-top: 0px;
+  }
 `;
 const LeftContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
-  // @media (min-width: 768px) and (max-width: 1024px) {
-  //   padding: 1rem;
-  // }
+  height: 100%;
+  @media (min-width: 769px) and (max-width: 801px) {
+    padding-top: 120px;
+  }
 `;
 const Span = styled.span`
   color: #0089ff;
