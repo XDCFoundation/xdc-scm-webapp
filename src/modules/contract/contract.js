@@ -44,7 +44,6 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      console.log("resss", response);
       setAddress(response.contractList);
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
