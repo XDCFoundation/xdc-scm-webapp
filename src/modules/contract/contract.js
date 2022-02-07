@@ -20,7 +20,7 @@ export default function Contract(props) {
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [tagToolTip, settagToolTip] = React.useState(false);
   const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
-  const [networkUrl, setNetworkUrl] = React.useState("");
+  // const [networkUrl, setNetworkUrl] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -110,9 +110,7 @@ export default function Contract(props) {
           <Tooltip disableFocusListener title="Refresh">
             <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
           </Tooltip>
-          {open && (
-            <AddContract click={handleClose} getContractList={getContractList} networkUrl={networkUrl} setNetworkUrl={setNetworkUrl} />
-          )}
+          {open && <AddContract click={handleClose} getContractList={getContractList} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
       </SubContainer>
@@ -189,12 +187,19 @@ export default function Contract(props) {
                 <Row>
                   <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
                   <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
-                  <ColumnSecond>{networkUrl}</ColumnSecond>
+                  <ColumnSecond>{data.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags && address[0].tags.map((tag, index) => index < 1 && <FinanceTag>{tag}</FinanceTag>)}
+                    {address[0].tags && address[0].tags.map((tag, index) => index < 0 && <FinanceTag>{tag}</FinanceTag>)}
                     {addTag && <AddTags click={Close} address={address} contract={true} />}
                     {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
+                  {/* <ColumnSecond style={{ display: "flex" }}>
+                    {address[0].tags && address[0].tags.map((tag, index) => index < 2 && <FinanceTag>{tag}</FinanceTag>)}
+
+                    {addTag && <AddTags click={Close} address={address} contract={true} />}
+                    {data.tags && data.tags.length && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
+                  </ColumnSecond> */}
+
                   <ColumnSecond>{data.isHidden ? "Hidden" : "Visible"}</ColumnSecond>
                 </Row>
               </Div>

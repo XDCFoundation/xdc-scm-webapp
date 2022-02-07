@@ -31,8 +31,8 @@ export default function AddContract(props) {
       return;
     }
     setVerifyAddress(address);
-    props.setNetworkUrl(response.network);
-    console.log("props.networkUrl", props.networkUrl);
+    // props.setNetworkUrl(response.network);
+    // console.log("props.networkUrl", props.networkUrl);
   };
 
   const addContract = async () => {
