@@ -3,6 +3,25 @@ import styled from "styled-components";
 import "../../assets/styles/custom.css";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { Tooltip, Typography, ClickAwayListener } from "@material-ui/core";
+
+const CustomTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: "#FFFFFF",
+    color: "#4B4B4B",
+    maxWidth: "402px",
+    width: "202px",
+    height: "215px",
+    fontSize: "16px",
+    fontWeight: "normal",
+    boxShadow: "0px 3px 12px #0000001A",
+    padding: "23.5px",
+    borderRadius: "4px",
+    wordSpacing: "2px",
+  },
+}))(Tooltip);
+
 const Web3 = require("web3");
 
 function Header(props) {
@@ -61,10 +80,12 @@ function Header(props) {
             >
               {getBalance} XDC
             </XDCInfo>
-            <UserContainer>
-              {getUserAccountAddress()}
-              <UserLogo src="/images/profile.svg" />
-            </UserContainer>
+            <CustomTooltip>
+              <UserContainer>
+                {getUserAccountAddress()}
+                <UserLogo src="/images/profile.svg" />
+              </UserContainer>
+            </CustomTooltip>
           </XDCContainer>
         ) : (
           <Button onClick={props.getCurrentUserDetails}>Connect Wallet</Button>

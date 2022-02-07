@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    height: "500px",
+    bottom: "100px",
   },
 }));
 
@@ -40,7 +42,6 @@ const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-  height: 300px;
   padding: 20px;
 `;
 const SubContainer = styled.div`
@@ -56,7 +57,8 @@ const Div = styled.div`
   border-radius: 4px;
   width: 100%;
   max-width: 650px;
-  height: 220px;
+  height: 420px;
+
   margin-top: 8px;
   padding: 20px;
   display: flex;

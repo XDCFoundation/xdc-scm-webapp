@@ -371,7 +371,7 @@ const RefreshImage = styled.img`
     margin-top: 51px;
     margin-left: 3px;
   }
-  @media (min-width: 376px) and (max-width: 432px) {
+  @media (min-width: 415px) and (max-width: 432px) {
     display: none;
   }
 `;
@@ -456,7 +456,14 @@ const Button = styled.button`
     height: 33px;
     background-position: 0.6rem;
   }
-  @media (min-width: 376px) and (max-width: 584px) {
+  @media (max-width: 414px) {
+    margin-top: 51px;
+    width: 35px;
+    font-size: 0rem;
+    height: 33px;
+    background-position: 0.6rem;
+  }
+  @media (min-width: 415px) and (max-width: 584px) {
     display: none;
   }
 `;
