@@ -5,11 +5,25 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-// import ReactPlayer from "react-player";
-
 import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
+const CustomTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: "#FFFFFF",
+    color: "#4B4B4B",
+    // maxWidth: "402px",
+    width: "200px",
+    height: "25px",
+    fontSize: "16px",
+    fontWeight: "normal",
+    boxShadow: "0px 3px 12px #0000001A",
+    // padding: "23.5px",
+    borderRadius: "4px",
+    wordSpacing: "2px",
+  },
+}))(Tooltip);
 export default function About(props) {
   const [state, setState] = useState(true);
   return (
@@ -28,7 +42,7 @@ export default function About(props) {
                 lifecycle utility, empowering the entire on-chain critical
                 business logic.
               </DataBox>
-              <Tooltip
+              <CustomTooltip
                 disableFocusListener
                 title="Click to get started with Xmartly"
               >
@@ -40,7 +54,7 @@ export default function About(props) {
                     src="/images/question-mark.svg"
                   />
                 </Button>
-              </Tooltip>
+              </CustomTooltip>
             </LeftContainer>
             <RightContainer>
               <VideoBox>
@@ -122,16 +136,17 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 3.125rem;
-  @media (min-width: 1025px) and (max-width: 1400px) {
-    display: block;
+  @media (min-width: 300px) and (max-width: 700px) {
+    padding: 1.125rem;
+  }
+  @media (max-width: 375px) {
+    padding: 16px;
+  }
+  @media (max-width: 768px) {
+    padding: 30px;
   }
   @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 1.5rem;
-    height: 100%;
-  }
-  @media (min-width: 0px) and (max-width: 767px) {
-    padding: 4.5rem 1rem;
-    height: 100%;
+    padding: 16px;
   }
 `;
 const Container = styled.div`
@@ -171,17 +186,13 @@ const RightContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 30px;
   }
-  @media (min-width: 769px) and (max-width: 801px) {
-    padding-top: 0px;
-  }
 `;
 const LeftContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
-  height: 100%;
-  @media (min-width: 769px) and (max-width: 801px) {
-    padding-top: 120px;
-  }
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   padding: 1rem;
+  // }
 `;
 const Span = styled.span`
   color: #0089ff;

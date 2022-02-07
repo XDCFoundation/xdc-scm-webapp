@@ -763,7 +763,7 @@ const TransactionHash = styled.div`
   margin-top: 0.5rem;
   width: 100%;
   @media (min-width: 300px) and (max-width: 767px) {
-    font-size: 0.575rem;
+    font-size: 0.7rem;
   }
   @media (max-width: 375px) {
     font-size: 0.55rem;
