@@ -61,7 +61,6 @@ export default function TransactionList(props) {
 
       setContracts(response.contractList);
 
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
@@ -102,7 +101,6 @@ export default function TransactionList(props) {
       setLoader(false);
       setSearchRow(response.transactionList);
 
-      if (response.transactionList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
@@ -198,7 +196,6 @@ export default function TransactionList(props) {
       );
 
       setAddress(response.transactionList);
-      console.log("response", response.transactionList);
     } catch (e) {
       console.log(e);
     }
@@ -450,12 +447,11 @@ export default function TransactionList(props) {
               );
             })}
           </div>
-          {/* {showPlaceHolder && (
-            <PlaceHolderContainer>
+          {(address.length === 0 || searchRow.length === 0 ? <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
-              No Contracts Found
-            </PlaceHolderContainer>
-          )} */}
+              No transaction found
+            </PlaceHolderContainer> : "" )
+          }
         </TableContainer>
         <PaginationDiv>
           <ReactPaginate
