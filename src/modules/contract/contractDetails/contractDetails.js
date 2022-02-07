@@ -24,7 +24,6 @@ export default function ContractDetails(props) {
   };
 
   const [contractAddress, setContractAddress] = React.useState({});
-  const [address, setAddress] = React.useState({});
   const getContractById = async () => {
     let url = window.location.pathname;
     let addressURL = url.split("/");
@@ -34,6 +33,7 @@ export default function ContractDetails(props) {
       setLoader(true);
       const response = await ContractsService.getContractsById(addressURL);
       setLoader(false);
+      console.log("response", response);
       setAddress(response);
     } catch (err) {
       setLoader(false);
@@ -43,6 +43,9 @@ export default function ContractDetails(props) {
     getContractById();
   }, []);
 
+  const [address, setAddress] = React.useState({});
+
+  const [value] = useState("");
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -67,6 +70,7 @@ export default function ContractDetails(props) {
     }
     setLoader(false);
   };
+  console.log("contractAddress", contractAddress);
   const showContract = async () => {
     let requestData = {
       id: contractAddress,
@@ -134,10 +138,6 @@ export default function ContractDetails(props) {
     setRemoveTag(true);
     setTagStore(tag);
   };
-  let name = "";
-  if (address.address !== undefined) {
-    name = address.address;
-  }
   return (
     <>
       <ShowLoader state={loader} />
@@ -167,8 +167,8 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress(name)}</Hash>
-            <CopyToClipboard text={name}>
+            <Hash>{utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}</Hash>
+            <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
           </div>
@@ -241,45 +241,14 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Tags</TableHeading>
-                <TableData>
+                <TagData>
                   <Row>
-                    {address.tags &&
-                      address.tags.map((tag, index) => (
-                        <div>
-                          {console.log("abc", tag, index)}
-                          <FinanceTag onClick={() => removeTagOpen(tag)}>
-                            <ImageTag
-                              removeTagImage={removeTagImage}
-                              index={index}
-                              address={address}
-                              onMouseOver={() => setRemoveTagImage(index)}
-                              onMouseOut={() => setRemoveTagImage(-1)}
-                            />
-                            {tag}
-                          </FinanceTag>
-                        </div>
-                      ))}
-                    {removeTag ? (
-                      <RemoveTag
-                        click={() => setRemoveTag(false)}
-                        contractAddress={contractAddress}
-                        tag={tagStore}
-                        getContractById={getContractById}
-                      />
-                    ) : (
-                      ""
-                    )}
+                    {address.tags && address.tags.map((tag) => <FinanceTag>{tag}</FinanceTag>)}
 
-                    {addTag && (
-                      <AddTags
-                        click={Close}
-                        address={address}
-                        contract={false}
-                      />
-                    )}
+                    {addTag && <AddTags click={Close} address={address} contract={false} />}
                     <AddTag onClick={() => Open()}>Add Tag</AddTag>
                   </Row>
-                </TableData>
+                </TagData>
               </Div>
               <Div>
                 <TableHeading>Compiler</TableHeading>
