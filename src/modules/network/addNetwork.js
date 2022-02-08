@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import contractsService from "../../services/contractsService";
+import ShowLoader from "../../common/components/showLoader";
+const Web3 = require("web3");
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -12,6 +14,8 @@ const useStyles = makeStyles(() => ({
 
 export default function AddNetwork(props) {
   const classes = useStyles();
+  const [loader, setLoader] = React.useState(false);
+
   const addNetwork = async () => {
     let requestData = {
       networkName: networkName,
@@ -20,9 +24,11 @@ export default function AddNetwork(props) {
       currencySymbol: currencySymbol,
       blockExplorer: blockExplorer,
     };
-
+    setLoader(true);
     try {
       const response = await contractsService.addNetworks(requestData);
+      setLoader(false);
+
       console.log(response);
     } catch (e) {
       console.log("Error", e);
@@ -33,15 +39,20 @@ export default function AddNetwork(props) {
   const [chainId, setChainId] = React.useState("");
   const [currencySymbol, setCurrencySymbol] = React.useState("");
   const [blockExplorer, setBlockExplorer] = React.useState("");
+  const load = () => {
+    props.click(false);
+    props.getNetworkList();
+  };
 
   return (
     <div>
+      <ShowLoader state={loader} top={"33%"} />
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
           <Container>
             <SubContainer>
               <Add>Add Network</Add>
-              <img alt="" src="/images/close.svg" onClick={()=> props.click(false)} />
+              <img alt="" src="/images/close.svg" onClick={() => load()} />
             </SubContainer>
             <Heading>Network name</Heading>
             <Input type="text" placeholder="Name" onChange={(e) => setNetworkName(e.target.value)} value={networkName} />
@@ -54,7 +65,7 @@ export default function AddNetwork(props) {
             <Input type="text" placeholder="Symbol" onChange={(e) => setCurrencySymbol(e.target.value)} value={currencySymbol} />
             <Heading>Block explorer (optional)</Heading>
             <Input type="text" placeholder="Explorer" onChange={(e) => setBlockExplorer(e.target.value)} value={blockExplorer} />
-            <Button onClick={()=>  addNetwork()}>Add network</Button>
+            <Button onClick={() => addNetwork()}>Add network</Button>
           </Container>
         </MainContainer>
       </Dialog>

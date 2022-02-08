@@ -160,7 +160,6 @@ export default function TransactionList(props) {
     to: true,
     when: true,
   });
-  /////searchFilter
 
   const [select, setSelect] = React.useState(1);
 
@@ -176,24 +175,48 @@ export default function TransactionList(props) {
   const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async () => {
-    try {
-      if (select === 2 || select === 3) {
-        setFilterResponse({
-          skip: 0,
-          limit: 10,
-          status: select === 2 ? true : select === 3 ? false : "",
-          // from: fromInput,
-          // to: toInput,
-          // network: selectDrop,
-        });
-      } else {
-        setFilterResponse({
-          skip: 0,
-          limit: 10,
-        });
-      }
+    // try {
+    //   if (select === 2 || select === 3) {
+    //     setFilterResponse({
+    //       skip: 0,
+    //       limit: 10,
+    //       status: select === 2 ? true : select === 3 ? false : "",
+    //       // from: fromInput,
+    //       // to: toInput,
+    //       // network: selectDrop,
+    //     });
+    //   } else {
+    //     setFilterResponse({
+    //       skip: 0,
+    //       limit: 10,
+    //     });
+    //   }
 
-      const response = await ContractsService.getTransactionsList(filterResponse);
+    //   const response = await ContractsService.getTransactionsList(filterResponse);
+
+    //   setAddress(response.transactionList);
+    //   console.log("response", response.transactionList);
+    // }
+    let requestData = {
+      skip: 0,
+      limit: 10,
+      status: "",
+      // from: fromInput,
+      // to: toInput,
+      // network: selectDrop,
+    };
+    switch (select) {
+      case 2:
+        requestData.status = true;
+        break;
+      case 3:
+        requestData.status = false;
+        break;
+      default:
+        return requestData;
+    }
+    try {
+      const response = await ContractsService.getTransactionsList(requestData);
 
       setAddress(response.transactionList);
       console.log("response", response.transactionList);

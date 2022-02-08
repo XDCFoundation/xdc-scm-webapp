@@ -3,8 +3,6 @@ import styled from "styled-components";
 import AddNetwork from "./addNetwork";
 import Tooltip from "@mui/material/Tooltip";
 import contractsService from "../../services/contractsService";
-import utility from "../../utility";
-import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 
 export default function Network() {
@@ -32,7 +30,6 @@ export default function Network() {
         skip: skip,
         limit: limit,
       };
-
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
       setLoader(false);
@@ -44,6 +41,7 @@ export default function Network() {
       setLoader(false);
     }
   };
+
   return (
     <MainContainer>
       <ShowLoader state={loader} top={"33%"} />
@@ -52,7 +50,7 @@ export default function Network() {
           <Heading>Networks</Heading>
         </div>
         <div style={{ display: "flex" }}>
-          {open && <AddNetwork click={handleClose} />}
+          {open && <AddNetwork click={handleClose} getNetworkList={getNetworkList} />}
 
           <Button onClick={handleClickOpen}>Add Network</Button>
         </div>
@@ -86,7 +84,6 @@ export default function Network() {
         </Container>
         <div>
           {address.map((data, index) => {
-            console.log("dadada", data.networkName);
             return (
               <Container>
                 {/* <Icon src="/images/mainnet.svg" /> */}

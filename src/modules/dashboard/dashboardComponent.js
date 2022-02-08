@@ -6,7 +6,6 @@ import DesktopSideMenu from "./sidebar";
 import MobileSideMenu from "./mobileSidebar";
 import ContractDetails from "../contract/contractDetails/contractDetails";
 import Contract from "../contract/contract";
-
 import TransactionDetails from "../transactionDetails/transactionDetails";
 import TransactionList from "../transactions/transactionList";
 import Network from "../network/network";
