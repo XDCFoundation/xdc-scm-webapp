@@ -20,7 +20,6 @@ export default function Contract(props) {
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [tagToolTip, settagToolTip] = React.useState(false);
   const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
-  // const [networkUrl, setNetworkUrl] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,12 +40,11 @@ export default function Contract(props) {
         limit: limit,
         userId: userId,
       };
-
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-
       setAddress(response.contractList);
+
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
     } catch (e) {
@@ -187,18 +185,13 @@ export default function Contract(props) {
                 <Row>
                   <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
                   <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
-                  <ColumnSecond>{data.network}</ColumnSecond>
+                  <ColumnSecond>{data.network ? "Apothem" : "Mainnet"}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags && address[0].tags.map((tag, index) => index < 0 && <FinanceTag>{tag}</FinanceTag>)}
+                    {address[index].tags && address[index].tags.map((tag, index) => index <= 0 && <FinanceTag>{tag}</FinanceTag>)}
+
                     {addTag && <AddTags click={Close} address={address} contract={true} />}
                     {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
-                  {/* <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags && address[0].tags.map((tag, index) => index < 2 && <FinanceTag>{tag}</FinanceTag>)}
-
-                    {addTag && <AddTags click={Close} address={address} contract={true} />}
-                    {data.tags && data.tags.length && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
-                  </ColumnSecond> */}
 
                   <ColumnSecond>{data.isHidden ? "Hidden" : "Visible"}</ColumnSecond>
                 </Row>
