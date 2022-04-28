@@ -319,7 +319,7 @@ export default function Contract(props) {
                     >
                       {data.network}
                     </ColumnSecond>
-                    <ColumnSecond style={{ display: "flex" }}>
+                    <ColumnSecond>
                       <TagCol>
                         {data.tags.length === 0 ? (
                           <AddTag onClick={(e) => Open(e, data._id)}>
@@ -431,6 +431,7 @@ const FinanceTag = styled.div`
   font-size: 1rem;
   font-weight: 400;
   margin-right: 13px;
+  margin-bottom: 5px;
 `;
 
 const CopyToClipboardImage = styled.img`
@@ -760,6 +761,7 @@ const ColumnVisible = styled.div`
 `;
 const TagCol = styled.div`
   display: flex;
+  width: 130px;
   :hover {
     background-color: #f5f6fd;
   }

@@ -32,7 +32,25 @@ export default function About(props) {
     setScreenWidth(window.innerWidth);
   });
 
+function dynamicSort(property) {
+  var sortOrder = 1;
+
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+
+  return function (a,b) {
+      if(sortOrder == -1){
+          return b[property].localeCompare(a[property]);
+      }else{
+          return a[property].localeCompare(b[property]);
+      }        
+  }
+}
+
   useEffect(() => {
+    if(!sessionManager.getDataFromCookies("IMPORT")){
     const getContractList = async () => {
       let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
       const requestData = {
@@ -45,6 +63,7 @@ export default function About(props) {
         setContracts([]);
         return;
       }
+      response.sort(dynamicSort("tokenName"));
       setContracts(response);
       if (
         response &&
@@ -56,7 +75,9 @@ export default function About(props) {
     };
     if (sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)) {
       getContractList();
+    sessionManager.setDataInCookies(true, "IMPORT");
     }
+  }
   }, []);
   return (
     <>
