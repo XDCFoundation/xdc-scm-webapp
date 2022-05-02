@@ -147,6 +147,32 @@ export default function Destination() {
       margin-bottom: 0px;
     }
   `;
+  const ImgDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+`;
+const PlaceHolderImage = styled.img`
+  width: 60px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+  filter: grayscale(50%);
+  /* margin-bottom: 20px; */
+`;
+
+const PlaceHolderContainer = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    opacity: 50%;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+  `;
+
   const ColumnActive = styled.div`
     display: flex;
     font-size: 0.875rem;
@@ -298,7 +324,7 @@ export default function Destination() {
         <ColumnActive>Active Destination</ColumnActive>
         <LastDiv>
           {destinations &&
-            destinations.length > 0 &&
+            destinations.length > 0 ?
             destinations.map((destination) => (
               <Div>
                 <RowData>
@@ -355,7 +381,16 @@ export default function Destination() {
                   </DeleteDiv>
                 </RowData>
               </Div>
-            ))}
+            )): (
+              <div>
+                  <ImgDiv>
+                    <PlaceHolderImage src="images/set alerts.svg" alt="" />
+                  </ImgDiv>
+                  <PlaceHolderContainer>
+                    No destinations found <br />
+                  </PlaceHolderContainer>
+                </div>
+            )}
         </LastDiv>
       </MainContainer>
     </>

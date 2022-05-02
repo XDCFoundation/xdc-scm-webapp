@@ -47,7 +47,7 @@ const FooterImg = styled.img`
   margin: 0 0 24.84px -20px;
   @media screen and (min-width: 375px) and (max-width: 425px) {
     padding: 0 0 0 10px;
-    margin: 0 0 22.45px 0;
+    margin: 0 0 22.45px -22px;
   }
 `;
 const Text = styled.span`

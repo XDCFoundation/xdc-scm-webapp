@@ -319,7 +319,7 @@ export default function Contract(props) {
                     >
                       {data.network}
                     </ColumnSecond>
-                    <ColumnSecond style={{ display: "flex" }}>
+                    <ColumnSecond>
                       <TagCol>
                         {data.tags.length === 0 ? (
                           <AddTag onClick={(e) => Open(e, data._id)}>
@@ -421,7 +421,7 @@ const FinanceTag = styled.div`
   border: 1px solid #eaefff;
   border-radius: 0.25rem;
   cursor: pointer;
-  max-width: 17.75rem;
+  max-width: 19.75rem;
   white-space: nowrap;
   height: 2.125rem;
   align-items: center;
@@ -431,6 +431,7 @@ const FinanceTag = styled.div`
   font-size: 1rem;
   font-weight: 400;
   margin-right: 13px;
+  margin-bottom: 5px;
 `;
 
 const CopyToClipboardImage = styled.img`
@@ -760,6 +761,8 @@ const ColumnVisible = styled.div`
 `;
 const TagCol = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  max-width: 180px;
   :hover {
     background-color: #f5f6fd;
   }
