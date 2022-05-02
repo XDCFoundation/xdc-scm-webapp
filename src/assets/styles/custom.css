@@ -719,3 +719,7 @@ padding: 12.5px 10px !important;
 .extra::before{
   border: 0 !important;
 }
+
+.MuiTooltip-tooltip{
+  font-size: 13px !important;
+}

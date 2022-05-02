@@ -8,6 +8,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import ScreenSizeDetector from "screen-size-detector";
 import { cookiesConstants } from "../../constants";
+import { history } from "../../managers/history";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -71,7 +72,10 @@ export default function ImportContract(props) {
       return;
     }
     setAddress(response.contractList);
-    if (response) props.click();
+    if (response) {
+      props.click();
+      history.push("/contracts");
+    }
   };
 
   const handleClick = (e, name) => {
@@ -104,58 +108,60 @@ export default function ImportContract(props) {
         <MainContainer>
           <Container>
             <div>
-            <Add>Import Contract</Add>
-            <Content>
-              We have found {props?.contracts?.length} Contracts linked with
-              this wallet address. Do you want to import these contracts?
-            </Content>
-            <FlexDiv>
-              <HeadingOne>Contract Name</HeadingOne>
-              <HeadingTwo>Address</HeadingTwo>
-              <HeadingThree>Network</HeadingThree>
-            </FlexDiv>
+              <Add>Import Contract</Add>
+              <Content>
+                We have found <Count>{props?.contracts?.length} {props?.contracts?.length === 1 ? "contract" : "contracts"} </Count>linked with
+                this wallet address. Do you want to import these contracts?
+              </Content>
+              <FlexDiv>
+                <HeadingOne>Contract Name</HeadingOne>
+                <HeadingTwo>Address</HeadingTwo>
+                <HeadingThree>Network</HeadingThree>
+              </FlexDiv>
             </div>
             <ContractHolder>
-            {props?.contracts.length !== 0
-              ? props?.contracts.length &&
-                props?.contracts.map((item) => (
-                  <FlexDivInside>
-                    <ContractContent>
-                      {" "}
-                      {item?.tokenImage ? (
-                        <img
+              {props?.contracts.length !== 0
+                ? props?.contracts.length &&
+                  props?.contracts.map((item) => (
+                    <FlexDivInside>
+                      <ContractContent>
+                        {" "}
+                        {item?.tokenImage ? (
+                          <img
+                            style={{
+                              height: "20px",
+                              width: "20px",
+                              marginRight: "10px",
+                            }}
+                            src={item.tokenImage}
+                          ></img>
+                        ) : (
+                          ""
+                        )}
+                        {item.tokenName}
+                      </ContractContent>
+                      <BackgroundChangerTxhash>
+                        {utility.truncateTxnAddress(item.address)}
+                      </BackgroundChangerTxhash>
+                      <ContractNetwork>
+                        {item.network ? item.network : "XDC Mainnet"}
+                      </ContractNetwork>
+                      <div
                         style={{
-                          height: "20px",
-                          width: "20px",
-                          marginRight: "10px",
+                          display: "flex",
+                          alignItems: "center",
+                          marginLeft: "40px",
                         }}
-                        src={item.tokenImage}
-                      ></img>
-                      ) : ""}
-                      {item.tokenName}
-                    </ContractContent>
-                    <BackgroundChangerTxhash>
-                      {utility.truncateTxnAddress(item.address)}
-                    </BackgroundChangerTxhash>
-                    <ContractNetwork>
-                      {item.network ? item.network : "XDC Mainnet"}
-                    </ContractNetwork>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginLeft: "40px",
-                      }}
-                    >
-                      <CheckBox
-                        type="checkbox"
-                        onChange={(e) => handleClick(e, item.address)}
-                      />
-                    </div>
-                  </FlexDivInside>
-                ))
-              : ""}
-              </ContractHolder>
+                      >
+                        <CheckBox
+                          type="checkbox"
+                          onChange={(e) => handleClick(e, item.address)}
+                        />
+                      </div>
+                    </FlexDivInside>
+                  ))
+                : ""}
+            </ContractHolder>
             <Button onClick={addContract}>Import</Button>
             <ButtonSkip onClick={props.click}>Skip</ButtonSkip>
           </Container>
@@ -164,10 +170,13 @@ export default function ImportContract(props) {
     </div>
   );
 }
+const Count = styled.span`
+color: #416BE0;
+`;
 const ContractHolder = styled.div`
-height: auto;
-max-height: 167px;
-overflow-x: scroll;
+  height: auto;
+  max-height: 167px;
+  overflow-x: scroll;
 `;
 const HeadingOne = styled.div`
   color: #102c78;

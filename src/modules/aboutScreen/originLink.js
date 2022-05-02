@@ -11,8 +11,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+
 export default function OriginPopup(props) {
   const classes = useStyles();
+  const click = () => {
+    window.open("https://origin.xdc.org/");
+    props.click();
+  }
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -56,7 +61,7 @@ export default function OriginPopup(props) {
                     </SubTitle>
                   </IconContainer>
                 </DetailBox>
-                <Button onClick={()=> window.open("https://origin.xdc.org/")}>
+                <Button onClick={click}>
                   Go to Origin
                 </Button>
               </Container>
