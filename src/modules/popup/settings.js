@@ -95,8 +95,6 @@ const Heading = styled.div`
               Change the layout of the transactions list and display only the
               columns and information that is most important to you.
             </Content>
-
-            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
                 padding: "5px 12px 10px 10px",

@@ -21,6 +21,10 @@ export default function Rules() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
+  const handleViewClickRules = (e) => {
+    setActiveButton(e.target.id);
+    getContractList();
+  };
   const redirectToAlertDetails = (alertId) => {
     history.push(`/alert-detail/${alertId}`);
   };
@@ -114,8 +118,7 @@ export default function Rules() {
   useEffect(() => {
     let final = [];
     alerts.forEach((alert) => {
-      if(alert?.target?.type === "TAG")
-        final.push(alert);
+      if (alert?.target?.type === "TAG") final.push(alert);
       contracts.forEach((contract) => {
         if (alert?.target?.value === contract.address) {
           final.push(alert);
@@ -211,7 +214,7 @@ export default function Rules() {
     display: flex;
   `;
 
-const CopyToClipboardImage = styled.img`
+  const CopyToClipboardImage = styled.img`
 margin-left: 1%
 cursor: pointer;
 @media (min-width: 340px) and (max-width: 767px) {
@@ -274,18 +277,18 @@ cursor: pointer;
     }
   `;
 
-const ColumnLast = styled.div`
-display: flex;
-flex-flow: column nowrap;
-font-size: 0.875rem;
-color: #191919;
-width: 70%;
-min-width: 50px;
-@media (min-width: 300px) and (max-width: 1024px) {
-  width: 100%;
-  min-width: 160px;
-}
-`;
+  const ColumnLast = styled.div`
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 0.875rem;
+    color: #191919;
+    width: 70%;
+    min-width: 50px;
+    @media (min-width: 300px) and (max-width: 1024px) {
+      width: 100%;
+      min-width: 160px;
+    }
+  `;
 
   const MainContainer = styled.div`
     background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -301,28 +304,28 @@ min-width: 50px;
     }
   `;
 
-const Button = styled.button`
-background-image: url("/images/Add.svg");
-background-repeat: no-repeat;
-background-position: 0.5rem;
-padding-left: 1.313rem;
-background-size: 0.875rem;
-position: relative;
-background-color: #3163f0;
-color: #ffffff;
-border: none;
-border-radius: 0.25rem;
-width: 8.125rem;
-height: 2.125rem;
-font-size: 0.875rem;
+  const Button = styled.button`
+    background-image: url("/images/Add.svg");
+    background-repeat: no-repeat;
+    background-position: 0.5rem;
+    padding-left: 1.313rem;
+    background-size: 0.875rem;
+    position: relative;
+    background-color: #3163f0;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    width: 8.125rem;
+    height: 2.125rem;
+    font-size: 0.875rem;
 
-@media (max-width: 767px) {
-  width: 35px;
-  font-size: 0rem;
-  height: 33px;
-  background-position: 0.6rem;
-}
-`;
+    @media (max-width: 767px) {
+      width: 35px;
+      font-size: 0rem;
+      height: 33px;
+      background-position: 0.6rem;
+    }
+  `;
 
   const NewDiv = styled.div`
     padding: 0.938rem;
@@ -332,9 +335,9 @@ font-size: 0.875rem;
       width: fit-content;
       min-width: 1025px;
     }
-    :hover{
-  background-color: #F5F6FD ;
-  }
+    :hover {
+      background-color: #f5f6fd;
+    }
   `;
   const NewDivOne = styled.div`
     border-bottom: 0.063rem solid #e3e7eb;
@@ -368,14 +371,19 @@ font-size: 0.875rem;
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button disabled={contracts.length === 0 ? true: false} onClick={() => history.push("/add-alert")}>Add Alert</Button>
+          <Button
+            disabled={contracts.length === 0 ? true : false}
+            onClick={() => history.push("/add-alert")}
+          >
+            Add Alert
+          </Button>
         </TitleContainer>
         <Container>
           <NewDivOne>
             <TabLister>
               <TabView
                 id="Rules"
-                onClick={handleViewClick}
+                onClick={handleViewClickRules}
                 style={{
                   color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
@@ -531,32 +539,26 @@ font-size: 0.875rem;
                 rows.map((alert) => (
                   <NewDiv>
                     <RowData1>
-                      <ColumnTwo
-                      >
-                        {alert?.target?.name}
-                      </ColumnTwo>{" "}
-                      <ColumnTwo
-                      >
+                      <ColumnTwo>{alert?.target?.name}</ColumnTwo>{" "}
+                      <ColumnTwo>
                         <BackgroundChanger>
                           {utility.minimizeAddress(alert?.target?.value)}
                           <CopyToClipboard
-                          text={alert?.target?.value}
-                          onCopy={() => setcopyToolTip(true)}
-                        >
-                          <Tooltip
-                            title={copyToolTip ? "Copied" : "Copy to clipboard"}
+                            text={alert?.target?.value}
+                            onCopy={() => setcopyToolTip(true)}
                           >
-                            <CopyToClipboardImage src="/images/copy.svg" />
-                          </Tooltip>
-                        </CopyToClipboard>
+                            <Tooltip
+                              title={
+                                copyToolTip ? "Copied" : "Copy to clipboard"
+                              }
+                            >
+                              <CopyToClipboardImage src="/images/copy.svg" />
+                            </Tooltip>
+                          </CopyToClipboard>
                         </BackgroundChanger>
                       </ColumnTwo>
-                      <ColumnTwo
-                      >
-                        {alert?.target?.network}
-                      </ColumnTwo>
-                      <ColumnTwo
-                      >
+                      <ColumnTwo>{alert?.target?.network}</ColumnTwo>
+                      <ColumnTwo>
                         {genericConstants.ALERT_TYPE_NAMES[alert?.type]}
                       </ColumnTwo>
                       <ColumnLast
@@ -565,8 +567,8 @@ font-size: 0.875rem;
                           color: "#00A58C",
                         }}
                       >
-                        <div style={{paddingLeft: 75}}>
-                        {alert.status ? "Enabled" : "Disabled"}
+                        <div style={{ paddingLeft: 75 }}>
+                          {alert.status ? "Enabled" : "Disabled"}
                         </div>
                       </ColumnLast>
                       <ColumnLast>

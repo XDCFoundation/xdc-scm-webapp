@@ -188,6 +188,7 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
+    sessionManager.removeDataFromCookies("IMPORT");
     history.replace("/");
     // window.location.reload();
   };
