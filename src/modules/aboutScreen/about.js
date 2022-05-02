@@ -52,8 +52,8 @@ function dynamicSort(property) {
   useEffect(() => {
     if(!sessionManager.getDataFromCookies("IMPORT")){
     const getContractList = async () => {
-      // let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
-      let userId = "0x79fc68e6eadb2a01d23e69bc5e0641d84888448e";
+      let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
+      // let userId = "0x79fc68e6eadb2a01d23e69bc5e0641d84888448e";
       const requestData = {
         userId: userId,
       };
