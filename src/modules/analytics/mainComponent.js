@@ -1061,6 +1061,7 @@ const DropDown = styled.div`
   max-width: 453px;
   position: relative;
   min-height: 63px;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
@@ -1070,6 +1071,7 @@ const TransactionHash = styled.div`
   font-weight: 600;
   color: #416be0;
   margin-top: 4px;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.7rem;
     word-break: break-all;

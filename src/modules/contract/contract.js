@@ -421,7 +421,7 @@ const FinanceTag = styled.div`
   border: 1px solid #eaefff;
   border-radius: 0.25rem;
   cursor: pointer;
-  max-width: 17.75rem;
+  max-width: 19.75rem;
   white-space: nowrap;
   height: 2.125rem;
   align-items: center;
@@ -761,7 +761,8 @@ const ColumnVisible = styled.div`
 `;
 const TagCol = styled.div`
   display: flex;
-  width: 130px;
+  flex-wrap: wrap;
+  max-width: 180px;
   :hover {
     background-color: #f5f6fd;
   }

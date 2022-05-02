@@ -40,11 +40,11 @@ export default function AddTags(props) {
     <div>
       <Dialog
         classes={{ paper: classes.dialogBox }}
-        open={true}
+        open
         BackdropProps={{
           style: {
-            backgroundColor: "rgba(0, 0, 0, 0.3) !important",
-            boxShadow: "none",
+            boxShadow: "none !important",
+            opacity: 0.3,
           },
         }}
       >

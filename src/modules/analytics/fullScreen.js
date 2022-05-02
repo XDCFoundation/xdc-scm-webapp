@@ -48,7 +48,7 @@ export default function FullScreen(props) {
             <SubContainer>
               <AlignmentContainer>
                 <img
-                  style={{ marginRight: "8px" }}
+                  style={{ marginRight: "8px", cursor: "pointer" }}
                   alt=""
                   src="/images/back.svg"
                   onClick={ClickMe}
