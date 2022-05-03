@@ -36,6 +36,7 @@ export default function Historys() {
 
   useEffect(() => {
     getNotifications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countToggle]);
 
   const MainContainer = styled.div`

@@ -8,6 +8,7 @@ import utility from "../../utility";
 import commaNumber from "comma-number";
 
 export default function Graph(props) {
+  console.log("asasda", props.data);
   const [points, setPoints] = useState({ x: 0, y: 0 });
   const [data, setData] = useState([]);
   // const [type, setType] = useState("");
@@ -159,7 +160,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
       max: "auto",
     }}
     yFormat=" >-.2f"
-    curve="natural"
+    curve="catmullRom"
     axisTop={null}
     axisRight={null}
     axisBottom={null}
@@ -238,16 +239,6 @@ const Oval = styled.div`
 `;
 const DivOval = styled.div`
   margin-top: 0px;
-`;
-const GraphSize = styled.div`
-  height: 9.75rem;
-  width: auto;
-  margin-top: 1.29rem;
-  margin-bottom: 1.2rem;
-  background: transparent;
-  @media (max-width: 767px) {
-    height: 80px;
-  }
 `;
 const TooltipGraph = styled.div`
   width: 100%;

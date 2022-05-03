@@ -126,12 +126,6 @@ export default function Destination() {
       }
     }
   `;
-  const ToolTipIcon = styled.img`
-    width: 0.75rem;
-    cursor: pointer;
-    margin-left: 0.313rem;
-    white-space: nowrap;
-  `;
   const ColumnOne = styled.div`
     display: flex;
     font-size: 0.875rem;

@@ -258,14 +258,6 @@ export default function ContractDetails(props) {
     @media (min-width: 320px) and (max-width: 768px) {
     }
   `;
-  const Enabled = styled.div`
-    font-size: 14px;
-    font-weight: 600;
-    color: #00a58c;
-
-    @media (min-width: 320px) and (max-width: 768px) {
-    }
-  `;
   const FinanceTag = styled.div`
     display: flex;
     background: #ecf0ff 0% 0% no-repeat padding-box;

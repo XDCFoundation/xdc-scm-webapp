@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import styled from "styled-components";
 import "../../assets/styles/custom.css";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
-import { NETWORKS } from "../../constants";
-import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
 
 const Web3 = require("web3");
@@ -60,9 +58,6 @@ function Header(props) {
 
   const getUserBalance = async () => {
     let balance = sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
-    const web3 = new Web3(
-      new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
-    );
     let checkResult = Web3.utils.toChecksumAddress(balance);
 
     if (checkResult) getXDCWalletBalance(checkResult);

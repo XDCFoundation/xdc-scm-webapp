@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-// import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
 import utility from "../../utility";
 import { makeStyles } from "@material-ui/styles";
@@ -31,6 +30,7 @@ export default function AddAlerts(props) {
   React.useEffect(() => {
     getDestinations();
     setLoader(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getAlertList = async () => {

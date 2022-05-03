@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     top: "5rem",
     maxWidth: 570,
-    ["@media screen and (min-width: 300px) and (max-width: 768px)"]: {
+    "@media screen and (min-width: 300px) and (max-width: 768px)": {
       top: "12rem",
     },
   },

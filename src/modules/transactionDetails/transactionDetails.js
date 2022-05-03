@@ -4,7 +4,6 @@ import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
 import EventsDetails from "./eventsDetails";
-import StateChange from "./stateChange";
 import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
 import utility from "../../utility";
@@ -22,7 +21,6 @@ SyntaxHighlighter.registerLanguage("javascript", js);
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
-  const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [row, setRow] = React.useState([]);
   const [activeButton, setActiveButton] = React.useState("Overview");
@@ -42,8 +40,6 @@ export default function TransactionDetails() {
   const [selected, setSelected] = React.useState("");
   const [gasPriceUSD, setGasPriceUSD] = React.useState(0);
   const [functionName, setfunctionName] = React.useState("");
-
-  const wei = 1000000000;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -135,6 +131,7 @@ export default function TransactionDetails() {
     setSelected(selected);
     getTransaction(id);
     setLoader(true);
+    //eslint-disable-next-line
   }, [url]);
 
   const MainContainer = styled.div`
@@ -509,10 +506,6 @@ export default function TransactionDetails() {
     @media (min-width: 1024px) and (max-width: 1075px) {
       margin-left: 84px;
     }
-  `;
-
-  const StackTraceCheckDiv = styled.div`
-    display: ${(props) => (props.check === "Fail" ? "block" : "none")};
   `;
 
   const TokenTransferCheckDiv = styled.div`
@@ -969,7 +962,7 @@ export default function TransactionDetails() {
                       {moment(row.timestamp * 1000)
                         .utc()
                         .format("lll")}
-                      {" " + "UTC"}
+                      {" "}{"UTC"}
                     </div>
                   ) : (
                     ""
