@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
@@ -53,7 +53,6 @@ const useStyles = makeStyles(() => ({
 export default function ImportContract(props) {
   const screen = new ScreenSizeDetector();
   const classes = useStyles();
-  const [address, setAddress] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
 
@@ -71,7 +70,6 @@ export default function ImportContract(props) {
     if (error) {
       return;
     }
-    setAddress(response.contractList);
     if (response) {
       props.click();
       history.push("/contracts");
@@ -134,6 +132,7 @@ export default function ImportContract(props) {
                               marginRight: "10px",
                             }}
                             src={item.tokenImage}
+                            alt="token"
                           ></img>
                         ) : (
                           ""

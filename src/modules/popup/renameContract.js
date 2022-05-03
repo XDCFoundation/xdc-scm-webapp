@@ -11,10 +11,10 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     top: "0px",
-  ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
-    top: "-5% !important",
-  
-}}
+    "@media screen and (min-width: 300px) and (max-width: 768px)": {
+      top: "-5% !important",
+    },
+  },
 }));
 
 export default function RenameContract(props) {
@@ -58,7 +58,11 @@ export default function RenameContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <ButtonConfirm input={newName} click={renameContract} text={"Rename"} />
+              <ButtonConfirm
+                input={newName}
+                click={renameContract}
+                text={"Rename"}
+              />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>

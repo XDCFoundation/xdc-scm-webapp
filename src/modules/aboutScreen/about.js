@@ -20,17 +20,12 @@ export default function About(props) {
   const [state, setState] = useState(true);
   const [address] = React.useState({});
   const [originPopup, setOriginPopup] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(false);
   const [importPopup, setImportPopup] = useState(false);
   const [contracts, setContracts] = useState([]);
 
   const handleOpen = () => {
     setOriginPopup(true);
   };
-
-  window.addEventListener("resize", () => {
-    setScreenWidth(window.innerWidth);
-  });
 
 function dynamicSort(property) {
   var sortOrder = 1;
@@ -41,7 +36,7 @@ function dynamicSort(property) {
   }
 
   return function (a,b) {
-      if(sortOrder == -1){
+      if(sortOrder === -1){
           return b[property].localeCompare(a[property]);
       }else{
           return a[property].localeCompare(b[property]);
@@ -604,24 +599,36 @@ const ButtonOriginMob = styled.button`
     width: 222px;
   }
   @media (min-width: 392px) and (max-width: 413px) {
-    margin-left: 102px;
+    margin-left: 73px;
     font-size: 0.6rem;
     height: 40px;
+    width: 146px;
+    display: flex;
+    justify-content: center;
   }
   @media (min-width: 377px) and (max-width: 391px) {
-    margin-left: 95px;
+    margin-left: 67px;
     font-size: 0.6rem;
     height: 40px;
+    width: 146px;
+    display: flex;
+    justify-content: center;
   }
   @media (min-width: 360px) and (max-width: 376px) {
-    margin-left: 85px;
+    margin-left: 50px;
     font-size: 0.6rem;
     height: 40px;
+    width: 146px;
+    display: flex;
+    justify-content: center;
   }
   @media (min-width: 414px) and (max-width: 420px) {
-    margin-left: 88px;
+    margin-left: 55px;
     font-size: 0.6rem;
     height: 40px;
+    width: 146px;
+    display: flex;
+    justify-content: center;
   }
 
   @media (min-width: 1024px) {

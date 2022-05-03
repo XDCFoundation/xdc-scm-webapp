@@ -59,7 +59,6 @@ export default function TransactionList() {
   const [selected, setSelected] = React.useState("");
   const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
-  const [valueCheck, setValueCheck] = React.useState(0);
   const [initialPage, setInitialPage] = React.useState();
   const [defaultAddress, setDefaultAddress] = React.useState("");
 
@@ -218,7 +217,6 @@ export default function TransactionList() {
     });
   };
   const changePage = (value) => {
-    setValueCheck(value.selected);
     if (setFrom > 0 || select === 2 || select === 3) {
       filterSearch(Math.ceil(value.selected * countToggle), countToggle);
     } else if (selected.length > 0) {

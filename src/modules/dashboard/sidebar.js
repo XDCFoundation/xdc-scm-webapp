@@ -150,6 +150,7 @@ export default function Sidebar(props) {
       handleWalletSession();
     }, 500);
     window.addEventListener("load", HandleWalletChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet]);
 
   HandleWalletChange();

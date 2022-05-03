@@ -292,6 +292,7 @@ export default function Contract(props) {
                             marginRight: "10px",
                           }}
                           src={data.tokenImage}
+                          alt="token"
                         ></img>
                       ) : (
                         ""
