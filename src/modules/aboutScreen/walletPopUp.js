@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
     width: "100% !important",
     marginBottom: "275px",
     height: "440px",
-    ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
+    '@media screen and (min-width: 300px) and (max-width: 580px)':{
       height: "540px",
       marginBottom: "51px",
       width:"88% !important",
@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function WalletPopUp(props) {
-  const screen = new ScreenSizeDetector();
   const classes = useStyles();
   const connectWallet = () => {
     if (props.getCurrentUserDetails()) props.click(); 

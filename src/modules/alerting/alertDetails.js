@@ -125,6 +125,7 @@ export default function AlertDetails() {
     alertId = alertId[alertId.length - 1];
     setAlertId(alertId);
     getAlert(alertId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [alertId]);
   const backButton = () => {
     history.push("/alerting");

@@ -13,7 +13,6 @@ import contractsService from "../../services/contractsService";
 import DestinationService from "../../services/destination";
 import AlertService from "../../services/alert";
 import AddDestination from "../popup/addDestination";
-import { Dropdown } from "react-bootstrap";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -1163,21 +1162,7 @@ const Img = styled.img`
   width: 1.3rem;
   margin-right: 4px;
 `;
-const FilterSelect = styled.select`
-  outline: none;
-  border: none;
-  background-color: #f5f6fd;
-  border-radius: 3px;
-  width: 100%;
-  padding: 0px 10px 0px 10px;
-  font-size: 12px;
-  height: 40px;
-  color: #a6aabf;
-  max-width: 1000px;
-  @media (min-width: 768px) and (max-width: 1024px) {
-    max-width: 350px;
-  }
-`;
+
 const Threshold = styled.input`
   outline: none;
   border: none;

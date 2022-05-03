@@ -91,7 +91,8 @@ const Button = styled.button`
   padding-left: 88px;
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;
-    display:none;
+    margin-bottom: 10px;
+    /* display:none; */
   }
 `;
 const StepsTitle = styled.div`
@@ -137,7 +138,8 @@ const DetailBox = styled.div`
   // padding-bottom: 18px;
   @media (min-width: 250px) and (max-width:580px) {
     flex-direction: column;
-    display:none;
+    margin-left: 47px;
+    /* display:none; */
   }
 `;
 const MainContainer = styled.div`
@@ -159,6 +161,7 @@ const Container = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     padding-left: 17px;
     padding-right: 17px;
+    overflow-x: hidden;
   }
 `;
 const Add = styled.div`
