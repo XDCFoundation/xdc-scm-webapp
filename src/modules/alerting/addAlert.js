@@ -284,7 +284,7 @@ export default function AddAlert() {
             <TitleHead>
               <img
                 alt=""
-                style={{ marginRight: "0.625rem" }}
+                style={{ marginRight: "0.625rem", cursor: "pointer" }}
                 src="/images/back.svg"
                 onClick={backButton}
               />
@@ -948,6 +948,9 @@ const ApplyButton = styled.button`
   margin-bottom: 15px;
   margin-top: 12px;
   cursor: pointer;
+  :hover{
+    background-color: #254FC6;
+  }
 `;
 const Title = styled.div`
   font-size: 0.775rem;

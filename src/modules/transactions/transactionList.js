@@ -442,7 +442,9 @@ export default function TransactionList() {
                   )}
 
                   {isSetOpen ? (
-                    <Box sx={styles}>
+                    <Box sx={styles}
+                    className="scrollShow"
+                    >
                       {contracts.length === 0 ? (
                         <Label>No contract available</Label>
                       ) : (
@@ -750,7 +752,7 @@ export default function TransactionList() {
                   <PlaceHolderImage src="/images/transactions-blue.svg" />
                   No transactions found. <br />
                   <span style={{color: "#3163F0 !important"}}>
-                    <Link href="/contracts">Add </Link> your first contract{" "}
+                    <Link  href="/contracts" style={{color: "blue"}}>Add </Link> your first contract{" "}
                   </span>
                 </PlaceHolderContainer>
               )
@@ -816,7 +818,7 @@ const Hover = styled.div`
 `;
 
 const Link = styled.a`
-  color: #3163F0 !important;
+  color: #1C4EDB;
 `;
 
 const PageVerifyCheck = styled.div`

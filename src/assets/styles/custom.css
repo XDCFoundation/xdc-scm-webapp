@@ -223,7 +223,7 @@ input:focus {
 } */
 
 ::-webkit-scrollbar {
-  width: 0.1rem;
+  width: 0.2rem;
   height: 0.2rem;
 }
 ::-webkit-scrollbar-track-piece {
@@ -233,9 +233,12 @@ input:focus {
   background-color: #3163f0;
 }
 
-::-webkit-scrollbar-thumb:vertical {
-  display: none;
+.scrollShow::-webkit-scrollbar-thumb:vertical {
+  border-radius: 4px !important;
+  background-color: #1C4EDB !important;
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5) !important;
 }
+
 .text-transform-capitalize {
   text-transform: capitalize !important;
 }
@@ -722,4 +725,8 @@ padding: 12.5px 10px !important;
 
 .MuiTooltip-tooltip{
   font-size: 13px !important;
+}
+
+.csvLink:hover{
+  background-color: #254FC6 !important;
 }

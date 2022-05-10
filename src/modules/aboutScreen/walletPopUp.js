@@ -3,8 +3,6 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Toaster } from "react-hot-toast";
-import ScreenSizeDetector from "screen-size-detector";
-
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -181,6 +179,9 @@ const Button = styled.button`
   font-size: 16px;
   font-weight: 500;
   margin-top: 27px;
+  :hover{
+      background-color:#254FC6;
+    }
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;
     display:none;

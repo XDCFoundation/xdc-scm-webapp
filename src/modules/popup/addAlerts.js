@@ -120,8 +120,8 @@ export default function AddAlerts(props) {
 
   useEffect(() => {
     let ids = [];
-    alertList.map((main) => {
-      main.map((dest) => {
+    alertList.forEach((main) => {
+      main.forEach((dest) => {
         ids.push(dest.destinationId);
       });
     });

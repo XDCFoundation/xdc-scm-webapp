@@ -316,11 +316,11 @@ const MainBoxContainer = styled.div`
   height: -webkit-fill-available;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
-    height: 1450px;
+    height: fit-content;
   }
   @media (min-width: 414px) and (max-width: 768px) {
     padding: 1.125rem;
-    height: 1811px;
+    height: fit-content;
   }
   @media (max-width: 375px) {
     padding: 16px;
@@ -515,6 +515,9 @@ const Button = styled.button`
   font-size: 1rem;
   font-weight: 500;
   white-space: nowrap;
+  :hover{
+    background-color: #254FC6;
+  }
   @media (min-width: 340px) and (max-width: 1023px) {
     margin-left: auto;
     margin-right: auto;
@@ -553,6 +556,9 @@ const ButtonOrigin = styled.button`
   font-size: 1rem;
   font-weight: 500;
   white-space: nowrap;
+  :hover{
+    background-color: #254FC6;
+  }
   @media (min-width: 340px) and (max-width: 1023px) {
     margin-left: auto;
     margin-right: auto;
@@ -717,8 +723,8 @@ const SubHead = styled.div`
   width: 100%;
   padding-bottom: 1.25rem;
   font-weight: 400;
-  @media (min-width: 300px) and (max-width: 414px) {
-    font-size: 0.8rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 14px;
   }
 `;
 const DivFooter = styled.div`
@@ -743,6 +749,9 @@ const SmartButton = styled.div`
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
+  :hover{
+    background-color: #254FC6;
+  }
   @media (min-width: 768px) and (max-width: 1024px) {
     margin-left: 30%;
     margin-top: 21px;

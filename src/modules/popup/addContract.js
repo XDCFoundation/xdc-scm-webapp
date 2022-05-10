@@ -14,6 +14,7 @@ const useStyles = makeStyles(() => ({
     width: "100% !important",
     backgroundColor: "#FFFFFF",
     bottom: "180px",
+    boxShadow: "none !important",
     "@media screen and (min-width: 300px) and (max-width: 360px)": {
       backgroundColor: "#ECF0F7 !important",
       margin: "0px !important",
@@ -65,6 +66,10 @@ export default function AddContract(props) {
     setLoader(false);
     if (error) {
       setError(error);
+      setTimeout(()=> {
+        setError("");
+      }, 2000);
+      setVerifyAddress("");
       return;
     }
     setVerifyAddress(address);
@@ -170,9 +175,7 @@ export default function AddContract(props) {
                 <PaddingDiv>4. Paste it on the given field above</PaddingDiv>
               </Text>
             )}
-            {!error && verifyAddress === "" ? (
-              ""
-            ) : (
+            {verifyAddress!=="" ? (
               <ImportBox>
                 <IconImport>
                   <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
@@ -187,7 +190,8 @@ export default function AddContract(props) {
                   <AddressImport>{address}</AddressImport>
                 </SelectImport>
               </ImportBox>
-            )}
+            ) : ""}
+              
 
             <Button
               disabled={address === "" || checkBox === false}
