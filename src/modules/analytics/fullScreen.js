@@ -169,6 +169,9 @@ const ExpandButton = styled.button`
   height: 34px;
   font-size: 1rem;
   font-weight: 600;
+  :hover{
+    background-color: #254FC6;
+  }
 `;
 const AlignmentContainer = styled.div`
   display: flex;

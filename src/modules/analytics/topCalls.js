@@ -33,6 +33,7 @@ export default function TopCalls(props) {
         <AlignmentContainer>
           {props.graphNo === 4 ? (
             <CSVLink
+              className="csvLink"
               style={props?.data?.length > 0 ? csvLink : csvLinkDisabled}
               data={props.data}
               headers={topCallersheaders}
@@ -42,6 +43,7 @@ export default function TopCalls(props) {
             </CSVLink>
           ) : (
             <CSVLink
+              className="csvLink"
               style={props?.data?.length > 0 ? csvLink : csvLinkDisabled}
               data={props.data}
               headers={topFunctionCallheaders}
@@ -234,6 +236,9 @@ const csvLink = {
   textDecoration: "none",
   paddingTop: "5px",
   paddingRight: "15px",
+  "&hover": {
+    backgroundColor: "#254FC6", 
+  }
 };
 const csvLinkDisabled = {
   backgroundImage: `url("/images/export.svg")`,

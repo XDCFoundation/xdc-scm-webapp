@@ -8,11 +8,14 @@ import DestinationService from "../../services/destination";
 import { sessionManager } from "../../managers/sessionManager";
 import AddDestination from "../popup/addDestination";
 import { cookiesConstants, genericConstants } from "../../constants";
+import { history } from "../../managers/history";
+import ShowLoader from "../../common/components/showLoader";
 
 export default function Destination() {
   const [destinations, setDestinations] = React.useState([]);
   const [addDestinationPopup, setAddDestinationPopup] = React.useState(false);
   const [destinationType, setDestinationType] = React.useState("");
+  const [loader, setLoader] = React.useState(false);
 
   const getDestinations = async () => {
     let requestData = {
@@ -54,6 +57,7 @@ export default function Destination() {
     getDestinations();
   };
   const deleteDestination = async (destinationId) => {
+    setLoader(true);
     const [error] = await utility.parseResponse(
       DestinationService.deleteDestination(destinationId)
     );
@@ -61,7 +65,13 @@ export default function Destination() {
     // utility.apiSuccessToast("Destination Deleted Successfully");
     await getDestinations();
     setTimeout(() => {
-      window.location.reload();
+      history.push({
+        pathname: "/alerting",
+        state: {
+          destinations: true,
+        } 
+      })
+    setLoader(false);
     }, 100);
   };
   const resendEmail = async (destination) => {
@@ -316,6 +326,7 @@ const PlaceHolderContainer = styled.div`
         </Div>
 
         <ColumnActive>Active Destination</ColumnActive>
+        <ShowLoader state={loader} top={"40%"}></ShowLoader>
         <LastDiv>
           {destinations &&
             destinations.length > 0 ?

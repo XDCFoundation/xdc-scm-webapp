@@ -64,7 +64,7 @@ export default function MainComponent(props) {
 
   const styles = {
     position: "absolute",
-    top: 70,
+    top: 90,
     right: 0,
     left: 0,
     zIndex: 1,
@@ -75,11 +75,13 @@ export default function MainComponent(props) {
     background: "#f5f6fd 0% 0% no-repeat padding-box",
     border: "1px solid #d5e0ff",
     borderRadius: "6px",
-    overflowY: "auto",
+    overflowY: "scroll !important",
     marginTop: "4px",
     fontSize: "0.875rem",
     fontWeight: "600",
     color: "#191919",
+    height: "200px",
+    
   };
 
   const getContractNames = async (skip = 0, limit = 10) => {
@@ -471,7 +473,9 @@ export default function MainComponent(props) {
                         </DropDown>
                       )}
                       {isSetOpen ? (
-                        <Box sx={styles}>
+                        <Box sx={styles} 
+                        className="scrollShow"
+                        >
                           {contracts.length &&
                             contracts.map((item) => (
                               <Hover onClick={() => changeContract(item)}>
@@ -1060,8 +1064,10 @@ const DropDown = styled.div`
   width: 100%;
   max-width: 453px;
   position: relative;
-  min-height: 63px;
+  height: 90px;
   cursor: pointer;
+  padding-top: 17px;
+  margin-top: 15px;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
@@ -1072,6 +1078,7 @@ const TransactionHash = styled.div`
   color: #416be0;
   margin-top: 4px;
   cursor: pointer;
+  margin-bottom: 14px;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.7rem;
     word-break: break-all;

@@ -622,7 +622,9 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
-
+  :hover{
+    background-color: #254FC6;
+  }
   @media (max-width: 767px) {
     width: 35px;
     font-size: 0rem;

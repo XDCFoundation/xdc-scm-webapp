@@ -109,7 +109,8 @@ export default function Rules() {
     setActiveButton("Rules");
     getContractList();
     let check = history?.location?.state?.id;
-    if (check === "add") {
+    let destination = history?.location?.state?.destinations;
+    if (check === "add" || destination === true) {
       setActiveButton("Destination");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -160,7 +161,7 @@ export default function Rules() {
     border-radius: 0.375rem;
     width: 100%;
     height: 20rem;
-    padding: 1rem;
+    padding: 1rem 0rem 1rem 1rem;
     overflow-y: hidden;
     @media (min-width: 300px) and (max-width: 700px) {
       width: 100%;
@@ -207,7 +208,7 @@ export default function Rules() {
     border-radius: 0.375rem;
     width: 100%;
     background-color: #ffffff;
-    padding: 0.5rem;
+    padding: 0.5rem 0rem 0.5rem 0rem;
     white-space: nowrap;
   `;
   const RowData = styled.div`
@@ -318,7 +319,9 @@ cursor: pointer;
     width: 8.125rem;
     height: 2.125rem;
     font-size: 0.875rem;
-
+    :hover{
+      background-color: #254FC6;
+    }
     @media (max-width: 767px) {
       width: 35px;
       font-size: 0rem;
@@ -389,6 +392,7 @@ cursor: pointer;
                   display: "flex",
                   paddingBottom: "0.875rem",
                   paddingTop: " 9px",
+                  marginLeft: "10px",
                   fontSize: "14px",
                   borderBottom:
                     activeButton === "Rules" ? "0.2rem solid #3163F0" : "",

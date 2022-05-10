@@ -89,6 +89,9 @@ const Button = styled.button`
   font-weight: 500;
   margin-top: 27px;
   padding-left: 88px;
+  :hover{
+      background-color:#254FC6;
+    }
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;
     margin-bottom: 10px;

@@ -119,6 +119,14 @@ export default function AlertDetails() {
     getDestinations();
   };
 
+  const addDestination = () => {
+    history.push({
+      pathname: "/alerting",
+      state: {
+        destinations: true,
+      } 
+    })
+  }
   useEffect(() => {
     let alertId = window.location.href;
     alertId = alertId.split("/");
@@ -190,6 +198,9 @@ export default function AlertDetails() {
     width: 100px;
     height: 30px;
     font-size: 12px;
+    :hover{
+      background-color:#254FC6;
+    }
   `;
 
   const Container = styled.div`
@@ -238,6 +249,7 @@ export default function AlertDetails() {
     width: 100%;
     min-width: 200px;
     max-width: 200px;
+    white-space: nowrap;
   `;
   const Heads = styled.div`
     text-align: left;
@@ -278,7 +290,30 @@ export default function AlertDetails() {
     color: #ffffff;
     font-size: 14px;
     cursor: pointer;
+    white-space: nowrap;
+    :hover{
+      background-color:#254FC6;
+    }
   `;
+
+  const DestinationButton = styled.div`
+    top: 548px;
+    left: 341px;
+    width: 148px;
+    height: 34px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: #3163f0 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    text-align: left;
+    font: normal normal medium 16px/20px Inter;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+  `;
+
   const DisableButton = styled.div`
     top: 548px;
     left: 341px;
@@ -294,6 +329,9 @@ export default function AlertDetails() {
     color: #3163f0;
     font-size: 14px;
     cursor: pointer;
+  `;
+  const FlexDiv = styled.div`
+  display: flex;
   `;
   const TextColor = styled.div`
     text-align: left;
@@ -471,8 +509,7 @@ export default function AlertDetails() {
           </NewContainer>
         ) : (
           <DestinationDetail>
-            {destinations &&
-              destinations.length &&
+            {destinations && destinations.length !== 0 ? (
               destinations.map((destination) => (
                 <EmailBox>
                   <EmailDetail>
@@ -502,13 +539,28 @@ export default function AlertDetails() {
                     </label>
                   </div>
                 </EmailBox>
-              ))}
+              ))
+            ) : (
+              <Heading>No destinations added</Heading>
+            )}
+            <FlexDiv>
             <EditButton
-              style={{ marginRight: "4px" }}
+              style={{ marginRight: "4px", marginTop: "10px" }}
               onClick={() => updateAlert(alert.alertId)}
             >
               Update
             </EditButton>
+            {destinations.length === 0 ? (
+              <DestinationButton
+                style={{ marginRight: "4px", marginTop: "10px" }}
+                onClick={() => addDestination()}
+              >
+                Add Destination
+              </DestinationButton>
+            ) : (
+              ""
+            )}
+            </FlexDiv>
           </DestinationDetail>
         )}
       </MainContainer>
